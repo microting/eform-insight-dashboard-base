@@ -26,7 +26,6 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data
 {
     using eFormApi.BasePn.Abstractions;
     using eFormApi.BasePn.Infrastructure.Database.Entities;
-    using Entities;
     using Microsoft.EntityFrameworkCore;
 
     public class InsightDashboardPnDbContext : DbContext, IPluginDbContext
@@ -37,8 +36,6 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data
         {
         }
 
-        public DbSet<SurveyConfig> SurveyConfigs { get; set; }
-        public DbSet<SurveyConfigVersion> SurveyConfigVersions { get; set; }
         public DbSet<PluginConfigurationValue> PluginConfigurationValues { get; set; }
         public DbSet<PluginConfigurationValueVersion> PluginConfigurationValueVersions { get; set; }
         public DbSet<PluginPermission> PluginPermissions { get; set; }

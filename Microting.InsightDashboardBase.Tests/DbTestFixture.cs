@@ -92,8 +92,8 @@ namespace Microting.InsightDashboardBase.Tests
         private void ClearDb()
         {
             List<string> modelNames = new List<string>();
-            modelNames.Add(nameof(InsightDashboardPnDbContext.SurveyConfigs));
-            modelNames.Add(nameof(InsightDashboardPnDbContext.SurveyConfigVersions));
+            //modelNames.Add(nameof(InsightDashboardPnDbContext.SurveyConfigs));
+            //modelNames.Add(nameof(InsightDashboardPnDbContext.SurveyConfigVersions));
 
             foreach (var modelName in modelNames)
             {
