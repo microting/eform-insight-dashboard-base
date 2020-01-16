@@ -37,8 +37,14 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data
         {
         }
 
-        public DbSet<SurveyConfig> SurveyConfigs { get; set; }
-        public DbSet<SurveyConfigVersion> SurveyConfigVersions { get; set; }
+        public DbSet<Dashboard> Dashboards { get; set; }
+        public DbSet<DashboardVersion> DashboardVersions { get; set; }
+        public DbSet<DashboardItem> DashboardItems { get; set; }
+        public DbSet<DashboardItemVersion> DashboardItemVersions { get; set; }
+        public DbSet<DashboardLocation> DashboardLocations { get; set; }
+        public DbSet<DashboardReportTag> DashboardReportTags { get; set; }
+
+        // default tables
         public DbSet<PluginConfigurationValue> PluginConfigurationValues { get; set; }
         public DbSet<PluginConfigurationValueVersion> PluginConfigurationValueVersions { get; set; }
         public DbSet<PluginPermission> PluginPermissions { get; set; }
@@ -48,6 +54,15 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Dashboard>()
+                .HasIndex(x => x.SurveyId);
+
+            modelBuilder.Entity<DashboardLocation>()
+                .HasIndex(x => x.LocationId);
+
+            modelBuilder.Entity<DashboardReportTag>()
+                .HasIndex(x => x.ReportTagId);
 
             modelBuilder.Entity<PluginGroupPermissionVersion>()
                 .HasOne(x => x.PluginGroupPermission)

@@ -33,7 +33,7 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data.Factories
     {
         public InsightDashboardPnDbContext CreateDbContext(string[] args)
         {
-            //args = new[] { "Data Source=.\\SQLEXPRESS;Database=insight-dashboard-pn;Integrated Security=True" };
+            //args = new[] { "Data Source=.\\SQLEXPRESS;Database=insight-dashboard-pl;Integrated Security=True" };
             var optionsBuilder = new DbContextOptionsBuilder<InsightDashboardPnDbContext>();
             if (args.Any())
             {

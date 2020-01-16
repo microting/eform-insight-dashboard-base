@@ -24,13 +24,16 @@ SOFTWARE.
 
 namespace Microting.InsightDashboardBase.Infrastructure.Data.Entities
 {
-    using System.ComponentModel.DataAnnotations.Schema;
+    using System.ComponentModel.DataAnnotations;
     using eFormApi.BasePn.Infrastructure.Database.Base;
 
-    public class SurveyConfigVersion : BaseEntity
+    public class DashboardVersion : BaseEntity
     {
-        [ForeignKey("SurveyConfig")]
-        public int SurveyConfigId { get; set; }
-        public virtual SurveyConfig SurveyConfig { get; set; }
+        [StringLength(250)]
+        public string Name { get; set; }
+        public int SurveyId { get; set; }
+
+        public int DashboardId { get; set; }
+        public virtual Dashboard Dashboard { get; set; }
     }
 }
