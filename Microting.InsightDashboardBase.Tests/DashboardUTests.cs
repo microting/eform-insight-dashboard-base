@@ -46,7 +46,12 @@ namespace Microting.InsightDashboardBase.Tests
             Dashboard dashboard = new Dashboard
             {
                 UpdatedByUserId = rnd.Next(1, 255),
-                CreatedByUserId = rnd.Next(1, 255)
+                CreatedByUserId = rnd.Next(1, 255),
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow,
+                WorkflowState = Constants.WorkflowStates.Created,
+                Name = "Name",
+                SurveyId = 1,
             };
 
             // Act
@@ -64,12 +69,15 @@ namespace Microting.InsightDashboardBase.Tests
             Assert.AreEqual(1, dashboardVersions.Count);
 
             Assert.AreEqual(dashboard.Id, dbDashboard.Id);
-            Assert.AreEqual(dashboard.Version, dbDashboard.Version);
+            Assert.AreEqual(1, dbDashboard.Version);
             Assert.AreEqual(dashboard.WorkflowState, dbDashboard.WorkflowState);
             Assert.AreEqual(dashboard.CreatedAt.ToString(CultureInfo.InvariantCulture), dbDashboard.CreatedAt.ToString(CultureInfo.InvariantCulture));
             Assert.AreEqual(dashboard.CreatedByUserId, dbDashboard.CreatedByUserId);
             Assert.AreEqual(dashboard.UpdatedAt.ToString(), dbDashboard.UpdatedAt.ToString());
             Assert.AreEqual(dashboard.UpdatedByUserId, dbDashboard.UpdatedByUserId);
+            Assert.AreEqual(dashboard.Name, dbDashboard.Name);
+            Assert.AreEqual(dashboard.SurveyId, dbDashboard.SurveyId);
+
         }
 
         [Test]
@@ -81,7 +89,13 @@ namespace Microting.InsightDashboardBase.Tests
             Dashboard dashboard = new Dashboard
             {
                 UpdatedByUserId = rnd.Next(1, 255),
-                CreatedByUserId = rnd.Next(1, 255)
+                CreatedByUserId = rnd.Next(1, 255),
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow,
+                WorkflowState = Constants.WorkflowStates.Created,
+                Name = "Name",
+                SurveyId = 1,
+                Version = 1,
             };
 
             await dashboard.Create(DbContext);
@@ -101,11 +115,8 @@ namespace Microting.InsightDashboardBase.Tests
             Assert.AreEqual(2, dashboardVersion.Count);
 
             Assert.AreEqual(dashboard.Id, dbDashboard.Id);
-            Assert.AreEqual(dashboard.Version, dbDashboard.Version);
+            Assert.AreEqual(2, dbDashboard.Version);
             Assert.AreEqual(dashboard.WorkflowState, dbDashboard.WorkflowState);
-            Assert.AreEqual(dashboard.CreatedAt.ToString(CultureInfo.InvariantCulture), dbDashboard.CreatedAt.ToString(CultureInfo.InvariantCulture));
-            Assert.AreEqual(dashboard.CreatedByUserId, dbDashboard.CreatedByUserId);
-            Assert.AreEqual(dashboard.UpdatedAt.ToString(), dbDashboard.UpdatedAt.ToString());
             Assert.AreEqual(dashboard.UpdatedByUserId, dbDashboard.UpdatedByUserId);
 
             Assert.AreEqual(dashboard.Id, dashboardVersion[0].DashboardId);
@@ -121,7 +132,6 @@ namespace Microting.InsightDashboardBase.Tests
             Assert.AreEqual(dashboard.WorkflowState, dashboardVersion[1].WorkflowState);
             Assert.AreEqual(dashboard.CreatedAt.ToString(), dashboardVersion[1].CreatedAt.ToString());
             Assert.AreEqual(dashboard.CreatedByUserId, dashboardVersion[1].CreatedByUserId);
-            Assert.AreEqual(dashboard.UpdatedAt.ToString(), dashboardVersion[1].UpdatedAt.ToString());
             Assert.AreEqual(dashboard.UpdatedByUserId, dashboardVersion[1].UpdatedByUserId);
         }
 
@@ -134,7 +144,13 @@ namespace Microting.InsightDashboardBase.Tests
             Dashboard dashboard = new Dashboard
             {
                 UpdatedByUserId = rnd.Next(1, 255),
-                CreatedByUserId = rnd.Next(1, 255)
+                CreatedByUserId = rnd.Next(1, 255),
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow,
+                WorkflowState = Constants.WorkflowStates.Created,
+                Name = "Name",
+                SurveyId = 1,
+                Version = 1,
             };
 
             await dashboard.Create(DbContext);
@@ -154,11 +170,10 @@ namespace Microting.InsightDashboardBase.Tests
             Assert.AreEqual(2, dashboardVersion.Count);
 
             Assert.AreEqual(dashboard.Id, dbDashboard.Id);
-            Assert.AreEqual(dashboard.Version, dbDashboard.Version);
+            Assert.AreEqual(2, dbDashboard.Version);
             Assert.AreEqual(Constants.WorkflowStates.Removed, dbDashboard.WorkflowState);
             Assert.AreEqual(dashboard.CreatedAt.ToString(), dbDashboard.CreatedAt.ToString());
             Assert.AreEqual(dashboard.CreatedByUserId, dbDashboard.CreatedByUserId);
-            Assert.AreEqual(dashboard.UpdatedAt.ToString(), dbDashboard.UpdatedAt.ToString());
             Assert.AreEqual(dashboard.UpdatedByUserId, dbDashboard.UpdatedByUserId);
 
             Assert.AreEqual(dashboard.Id, dashboardVersion[0].DashboardId);
@@ -174,7 +189,6 @@ namespace Microting.InsightDashboardBase.Tests
             Assert.AreEqual(Constants.WorkflowStates.Removed, dashboardVersion[1].WorkflowState);
             Assert.AreEqual(dashboard.CreatedAt.ToString(), dashboardVersion[1].CreatedAt.ToString());
             Assert.AreEqual(dashboard.CreatedByUserId, dashboardVersion[1].CreatedByUserId);
-            Assert.AreEqual(dashboard.UpdatedAt.ToString(), dashboardVersion[1].UpdatedAt.ToString());
             Assert.AreEqual(dashboard.UpdatedByUserId, dashboardVersion[1].UpdatedByUserId);
         }
     }
