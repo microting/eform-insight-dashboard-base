@@ -13,11 +13,9 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data.Entities
         [StringLength(250)]
         public string Name { get; set; }
         public int SurveyId { get; set; }
+        public int? LocationId { get; set; } // Site id
+        public int? TagId { get; set; } // Tag id
 
-        public virtual List<DashboardLocation> DashboardLocation { get; set; }
-            = new List<DashboardLocation>();
-        public virtual List<DashboardReportTag> DashboardReportTags { get; set; }
-            = new List<DashboardReportTag>();
         public virtual List<DashboardItem> DashboardItems { get; set; }
             = new List<DashboardItem>();
 
@@ -27,6 +25,8 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data.Entities
             {
                 Name = Name,
                 SurveyId = SurveyId,
+                LocationId = LocationId,
+                TagId = TagId,
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow,
                 Version = 1,
@@ -44,6 +44,29 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data.Entities
             Id = dashboard.Id;
         }
 
+        public async Task Clone(InsightDashboardPnDbContext dbContext)
+        {
+            var values = dbContext.Entry(this).CurrentValues.Clone();
+            values[nameof(Dashboard.Id)] = 0;
+            values[nameof(Dashboard.Version)] = 1;
+            values[nameof(Dashboard.CreatedAt)] = DateTime.UtcNow;
+            values[nameof(Dashboard.UpdatedAt)] = DateTime.UtcNow;
+            values[nameof(Dashboard.UpdatedByUserId)] = UpdatedByUserId;
+            values[nameof(Dashboard.CreatedByUserId)] = CreatedByUserId;
+            values[nameof(Dashboard.WorkflowState)] = Constants.WorkflowStates.Created;
+
+
+            var newDashboard = new Dashboard();
+            dbContext.Entry(newDashboard).CurrentValues.SetValues(values);
+
+            await dbContext.SaveChangesAsync();
+
+            await dbContext.DashboardVersions.AddAsync(MapVersion(newDashboard));
+            await dbContext.SaveChangesAsync();
+
+            Id = newDashboard.Id;
+        }
+
         public async Task Update(InsightDashboardPnDbContext dbContext)
         {
             Dashboard dashboard = await dbContext.Dashboards.FirstOrDefaultAsync(x => x.Id == Id);
@@ -58,6 +81,8 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data.Entities
             dashboard.UpdatedByUserId = UpdatedByUserId;
             dashboard.Name = Name;
             dashboard.SurveyId = SurveyId;
+            dashboard.LocationId = LocationId;
+            dashboard.TagId = TagId;
 
             if (dbContext.ChangeTracker.HasChanges())
             {
@@ -103,6 +128,8 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data.Entities
                 CreatedByUserId = dashboard.CreatedByUserId,
                 Name = dashboard.Name,
                 SurveyId = dashboard.SurveyId,
+                LocationId = dashboard.LocationId,
+                TagId = dashboard.TagId,
             };
 
             return dashboardVersion;

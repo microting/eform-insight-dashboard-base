@@ -32,7 +32,8 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data.Entities
         [StringLength(250)]
         public string Name { get; set; }
         public int SurveyId { get; set; }
-
+        public int? LocationId { get; set; } // Site id
+        public int? TagId { get; set; } // Tag id
         public int DashboardId { get; set; }
         public virtual Dashboard Dashboard { get; set; }
     }
