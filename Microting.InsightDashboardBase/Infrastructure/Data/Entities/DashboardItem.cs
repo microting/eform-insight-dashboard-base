@@ -97,23 +97,23 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data.Entities
             }
         }
 
-        private static DashboardItemVersion MapVersion(DashboardItem dashboard)
+        private static DashboardItemVersion MapVersion(DashboardItem dashboardItem)
         {
             var dashboardItemVersion = new DashboardItemVersion
             {
-                DashboardId = dashboard.Id,
-                CreatedAt = dashboard.CreatedAt,
-                UpdatedAt = dashboard.UpdatedAt,
-                Version = dashboard.Version,
-                WorkflowState = dashboard.WorkflowState,
-                UpdatedByUserId = dashboard.UpdatedByUserId,
-                CreatedByUserId = dashboard.CreatedByUserId,
-                Position = dashboard.Position,
-                ChartType = dashboard.ChartType,
-                FilterAnswerId = dashboard.FilterAnswerId,
-                FilterQuestionId = dashboard.FilterQuestionId,
-                FirstQuestionId = dashboard.FirstQuestionId,
-                Period = dashboard.Period,
+                DashboardItemId = dashboardItem.Id,
+                CreatedAt = dashboardItem.CreatedAt,
+                UpdatedAt = dashboardItem.UpdatedAt,
+                Version = dashboardItem.Version,
+                WorkflowState = dashboardItem.WorkflowState,
+                UpdatedByUserId = dashboardItem.UpdatedByUserId,
+                CreatedByUserId = dashboardItem.CreatedByUserId,
+                Position = dashboardItem.Position,
+                ChartType = dashboardItem.ChartType,
+                FilterAnswerId = dashboardItem.FilterAnswerId,
+                FilterQuestionId = dashboardItem.FilterQuestionId,
+                FirstQuestionId = dashboardItem.FirstQuestionId,
+                Period = dashboardItem.Period,
             };
 
             return dashboardItemVersion;

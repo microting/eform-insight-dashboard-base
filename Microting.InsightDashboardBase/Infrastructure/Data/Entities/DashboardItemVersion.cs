@@ -11,7 +11,7 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data.Entities
         public DashboardPeriodUnits Period { get; set; }
         public DashboardChartTypes ChartType { get; set; }
         public int Position { get; set; }
-        public int DashboardId { get; set; }
-        public virtual Dashboard Dashboard { get; set; }
+        public int DashboardItemId { get; set; }
+        public virtual DashboardItem DashboardItem { get; set; }
     }
 }
