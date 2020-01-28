@@ -6,8 +6,8 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data.Entities
     public class DashboardItemVersion : BaseEntity
     {
         public int FirstQuestionId { get; set; } // questions.id
-        public int FilterQuestionId { get; set; } // ???
-        public int FilterAnswerId { get; set; } // ???
+        public int? FilterQuestionId { get; set; } // ???
+        public int? FilterAnswerId { get; set; } // ???
         public DashboardPeriodUnits Period { get; set; }
         public DashboardChartTypes ChartType { get; set; }
         public int Position { get; set; }
