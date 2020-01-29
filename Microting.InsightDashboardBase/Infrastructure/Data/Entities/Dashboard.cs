@@ -44,29 +44,6 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data.Entities
             Id = dashboard.Id;
         }
 
-        public async Task Clone(InsightDashboardPnDbContext dbContext)
-        {
-            var values = dbContext.Entry(this).CurrentValues.Clone();
-            values[nameof(Dashboard.Id)] = 0;
-            values[nameof(Dashboard.Version)] = 1;
-            values[nameof(Dashboard.CreatedAt)] = DateTime.UtcNow;
-            values[nameof(Dashboard.UpdatedAt)] = DateTime.UtcNow;
-            values[nameof(Dashboard.UpdatedByUserId)] = UpdatedByUserId;
-            values[nameof(Dashboard.CreatedByUserId)] = CreatedByUserId;
-            values[nameof(Dashboard.WorkflowState)] = Constants.WorkflowStates.Created;
-
-
-            var newDashboard = new Dashboard();
-            dbContext.Entry(newDashboard).CurrentValues.SetValues(values);
-
-            await dbContext.SaveChangesAsync();
-
-            await dbContext.DashboardVersions.AddAsync(MapVersion(newDashboard));
-            await dbContext.SaveChangesAsync();
-
-            Id = newDashboard.Id;
-        }
-
         public async Task Update(InsightDashboardPnDbContext dbContext)
         {
             Dashboard dashboard = await dbContext.Dashboards.FirstOrDefaultAsync(x => x.Id == Id);
