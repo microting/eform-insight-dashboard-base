@@ -13,11 +13,9 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data.Entities
         [StringLength(250)]
         public string Name { get; set; }
         public int SurveyId { get; set; }
+        public int? LocationId { get; set; } // Site id
+        public int? TagId { get; set; } // Tag id
 
-        public virtual List<DashboardLocation> DashboardLocation { get; set; }
-            = new List<DashboardLocation>();
-        public virtual List<DashboardReportTag> DashboardReportTags { get; set; }
-            = new List<DashboardReportTag>();
         public virtual List<DashboardItem> DashboardItems { get; set; }
             = new List<DashboardItem>();
 
@@ -27,6 +25,8 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data.Entities
             {
                 Name = Name,
                 SurveyId = SurveyId,
+                LocationId = LocationId,
+                TagId = TagId,
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow,
                 Version = 1,
@@ -58,6 +58,8 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data.Entities
             dashboard.UpdatedByUserId = UpdatedByUserId;
             dashboard.Name = Name;
             dashboard.SurveyId = SurveyId;
+            dashboard.LocationId = LocationId;
+            dashboard.TagId = TagId;
 
             if (dbContext.ChangeTracker.HasChanges())
             {
@@ -103,6 +105,8 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data.Entities
                 CreatedByUserId = dashboard.CreatedByUserId,
                 Name = dashboard.Name,
                 SurveyId = dashboard.SurveyId,
+                LocationId = dashboard.LocationId,
+                TagId = dashboard.TagId,
             };
 
             return dashboardVersion;

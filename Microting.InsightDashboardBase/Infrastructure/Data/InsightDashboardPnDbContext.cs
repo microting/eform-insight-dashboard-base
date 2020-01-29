@@ -58,6 +58,24 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data
             modelBuilder.Entity<Dashboard>()
                 .HasIndex(x => x.SurveyId);
 
+            modelBuilder.Entity<Dashboard>()
+                .HasIndex(x => x.LocationId);
+
+            modelBuilder.Entity<Dashboard>()
+                .HasIndex(x => x.TagId);
+
+            modelBuilder.Entity<Dashboard>()
+                .HasIndex(x => x.Name);
+
+            modelBuilder.Entity<DashboardItem>()
+                .HasIndex(x => x.FirstQuestionId);
+
+            modelBuilder.Entity<DashboardItem>()
+                .HasIndex(x => x.FilterQuestionId);
+
+            modelBuilder.Entity<DashboardItem>()
+                .HasIndex(x => x.FilterAnswerId);
+
             modelBuilder.Entity<DashboardLocation>()
                 .HasIndex(x => x.LocationId);
 
