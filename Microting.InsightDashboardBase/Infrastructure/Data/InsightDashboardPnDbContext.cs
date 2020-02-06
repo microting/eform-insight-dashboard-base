@@ -41,8 +41,8 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data
         public DbSet<DashboardVersion> DashboardVersions { get; set; }
         public DbSet<DashboardItem> DashboardItems { get; set; }
         public DbSet<DashboardItemVersion> DashboardItemVersions { get; set; }
-        public DbSet<DashboardLocation> DashboardLocations { get; set; }
-        public DbSet<DashboardReportTag> DashboardReportTags { get; set; }
+        public DbSet<DashboardItemCompare> DashboardItemCompares { get; set; }
+        public DbSet<DashboardItemIgnoredAnswer> DashboardItemIgnoredAnswers { get; set; }
 
         // default tables
         public DbSet<PluginConfigurationValue> PluginConfigurationValues { get; set; }
@@ -76,11 +76,14 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data
             modelBuilder.Entity<DashboardItem>()
                 .HasIndex(x => x.FilterAnswerId);
 
-            modelBuilder.Entity<DashboardLocation>()
+            modelBuilder.Entity<DashboardItemCompare>()
                 .HasIndex(x => x.LocationId);
 
-            modelBuilder.Entity<DashboardReportTag>()
-                .HasIndex(x => x.ReportTagId);
+            modelBuilder.Entity<DashboardItemCompare>()
+                .HasIndex(x => x.TagId);
+
+            modelBuilder.Entity<DashboardItemIgnoredAnswer>()
+                .HasIndex(x => x.AnswerId);
 
             modelBuilder.Entity<PluginGroupPermissionVersion>()
                 .HasOne(x => x.PluginGroupPermission)
