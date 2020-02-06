@@ -15,10 +15,14 @@ namespace Microting.InsightDashboardBase.Migrations
                 table: "DashboardItemVersions",
                 newName: "DashboardItemId");
 
-            migrationBuilder.RenameIndex(
+            migrationBuilder.DropIndex(
                 name: "IX_DashboardItemVersions_DashboardId",
+                table: "DashboardItemVersions");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DashboardItemVersions_DashboardItemId",
                 table: "DashboardItemVersions",
-                newName: "IX_DashboardItemVersions_DashboardItemId");
+                column: "DashboardId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_DashboardItemVersions_DashboardItems_DashboardItemId",
