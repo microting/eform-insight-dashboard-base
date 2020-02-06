@@ -92,10 +92,10 @@ namespace Microting.InsightDashboardBase.Tests
         private void ClearDb()
         {
             List<string> modelNames = new List<string>();
+            modelNames.Add(nameof(InsightDashboardPnDbContext.DashboardItemCompares));
+            modelNames.Add(nameof(InsightDashboardPnDbContext.DashboardItemIgnoredAnswers));
             modelNames.Add(nameof(InsightDashboardPnDbContext.DashboardItemVersions));
             modelNames.Add(nameof(InsightDashboardPnDbContext.DashboardItems));
-            modelNames.Add(nameof(InsightDashboardPnDbContext.DashboardLocations));
-            modelNames.Add(nameof(InsightDashboardPnDbContext.DashboardReportTags));
             modelNames.Add(nameof(InsightDashboardPnDbContext.DashboardVersions));
             modelNames.Add(nameof(InsightDashboardPnDbContext.Dashboards));
 

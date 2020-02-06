@@ -30,15 +30,15 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data.Entities
     using eFormApi.BasePn.Infrastructure.Database.Base;
     using Microsoft.EntityFrameworkCore;
 
-    public class DashboardReportTag : BaseEntity
+    public class DashboardItemIgnoredAnswer : BaseEntity
     {
-        public int ReportTagId { get; set; } // should be created
-        public int DashboardId { get; set; }
-        public virtual Dashboard Dashboard { get; set; }
+        public int AnswerId { get; set; }
+        public int DashboardItemId { get; set; }
+        public virtual DashboardItem DashboardItem { get; set; }
 
         public async Task Save(InsightDashboardPnDbContext dbContext)
         {
-            var dashboardReportTag = new DashboardReportTag
+            var dashboardReportTag = new DashboardItemIgnoredAnswer
             {
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow,
@@ -46,11 +46,11 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data.Entities
                 WorkflowState = Constants.WorkflowStates.Created,
                 UpdatedByUserId = UpdatedByUserId,
                 CreatedByUserId = CreatedByUserId,
-                DashboardId = DashboardId,
-                ReportTagId = ReportTagId,
+                DashboardItemId = DashboardItemId,
+                AnswerId = AnswerId,
             };
 
-            await dbContext.DashboardReportTags.AddAsync(dashboardReportTag);
+            await dbContext.DashboardItemIgnoredAnswers.AddAsync(dashboardReportTag);
             await dbContext.SaveChangesAsync();
 
             Id = dashboardReportTag.Id;
@@ -58,20 +58,20 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data.Entities
 
         public async Task Delete(InsightDashboardPnDbContext dbContext)
         {
-            var dashboardReportTag = await dbContext.DashboardReportTags
+            var dashboardReportTag = await dbContext.DashboardItemIgnoredAnswers
                 .FirstOrDefaultAsync(x => x.Id == Id);
 
             if (dashboardReportTag == null)
             {
-                throw new NullReferenceException($"Could not find dashboardReportTag with id: {Id}");
+                throw new NullReferenceException($"Could not find ignoredAnswer with id: {Id}");
             }
 
             dashboardReportTag.WorkflowState = Constants.WorkflowStates.Removed;
             dashboardReportTag.UpdatedAt = DateTime.UtcNow;
             dashboardReportTag.Version += 1;
-            dashboardReportTag.ReportTagId = ReportTagId;
+            dashboardReportTag.AnswerId = AnswerId;
 
-            dbContext.DashboardReportTags.Update(dashboardReportTag);
+            dbContext.DashboardItemIgnoredAnswers.Update(dashboardReportTag);
             await dbContext.SaveChangesAsync();
         }
     }
