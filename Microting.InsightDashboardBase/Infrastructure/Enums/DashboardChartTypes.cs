@@ -9,6 +9,7 @@
         HorizontalBarGrouped,
         VerticalBar,
         VerticalBarStacked,
-        VerticalBarGrouped
+        VerticalBarGrouped,
+        GroupedStackedBarChart
     }
 }
