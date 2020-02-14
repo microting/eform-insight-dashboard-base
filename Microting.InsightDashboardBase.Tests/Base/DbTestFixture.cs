@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace Microting.InsightDashboardBase.Tests
+namespace Microting.InsightDashboardBase.Tests.Base
 {
     using System;
     using System.Collections.Generic;
@@ -54,7 +54,9 @@ namespace Microting.InsightDashboardBase.Tests
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
+
                 _connectionString = @"data source=(LocalDb)\SharedInstance;Initial catalog=insight-dashboard-base-tests;Integrated Security=true";
+                //_connectionString = @"Data Source=.\SQLEXPRESS;Database=insight-dashboard-pl-test;Integrated Security=True";
             }
             else
             {
@@ -62,7 +64,15 @@ namespace Microting.InsightDashboardBase.Tests
                     @"Server = localhost; port = 3306; Database = insight-dashboard-base-tests; user = root; Convert Zero Datetime = true;";
             }
 
-            GetContext(_connectionString);
+            try
+            {
+                GetContext(_connectionString);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
 
 
             DbContext.Database.SetCommandTimeout(300);

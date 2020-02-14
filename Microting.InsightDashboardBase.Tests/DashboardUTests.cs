@@ -24,12 +24,13 @@ SOFTWARE.
 
 namespace Microting.InsightDashboardBase.Tests
 {
-    using System;
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
     using System.Threading.Tasks;
+    using Base;
     using eForm.Infrastructure.Constants;
+    using Helpers;
     using Infrastructure.Data.Entities;
     using Microsoft.EntityFrameworkCore;
     using NUnit.Framework;
@@ -41,18 +42,7 @@ namespace Microting.InsightDashboardBase.Tests
         public async Task Dashboard_Create_DoesCreate()
         {
             // Arrange
-            Random rnd = new Random();
-
-            Dashboard dashboard = new Dashboard
-            {
-                UpdatedByUserId = rnd.Next(1, 255),
-                CreatedByUserId = rnd.Next(1, 255),
-                CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.UtcNow,
-                WorkflowState = Constants.WorkflowStates.Created,
-                Name = "Name",
-                SurveyId = 1,
-            };
+            var dashboard = DashboardHelpers.GetNewDashboard();
 
             // Act
             await dashboard.Create(DbContext);
@@ -71,32 +61,22 @@ namespace Microting.InsightDashboardBase.Tests
             Assert.AreEqual(dashboard.Id, dbDashboard.Id);
             Assert.AreEqual(1, dbDashboard.Version);
             Assert.AreEqual(dashboard.WorkflowState, dbDashboard.WorkflowState);
-            Assert.AreEqual(dashboard.CreatedAt.ToString(CultureInfo.InvariantCulture), dbDashboard.CreatedAt.ToString(CultureInfo.InvariantCulture));
+            Assert.AreEqual(dashboard.CreatedAt.ToString(CultureInfo.InvariantCulture),
+                dbDashboard.CreatedAt.ToString(CultureInfo.InvariantCulture));
             Assert.AreEqual(dashboard.CreatedByUserId, dbDashboard.CreatedByUserId);
             Assert.AreEqual(dashboard.UpdatedAt.ToString(), dbDashboard.UpdatedAt.ToString());
             Assert.AreEqual(dashboard.UpdatedByUserId, dbDashboard.UpdatedByUserId);
             Assert.AreEqual(dashboard.Name, dbDashboard.Name);
             Assert.AreEqual(dashboard.SurveyId, dbDashboard.SurveyId);
-
+            Assert.AreEqual(dashboard.TagId, dbDashboard.TagId);
+            Assert.AreEqual(dashboard.LocationId, dbDashboard.LocationId);
         }
 
         [Test]
         public async Task Dashboard_Update_DoesUpdate()
         {
             // Arrange
-            Random rnd = new Random();
-
-            Dashboard dashboard = new Dashboard
-            {
-                UpdatedByUserId = rnd.Next(1, 255),
-                CreatedByUserId = rnd.Next(1, 255),
-                CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.UtcNow,
-                WorkflowState = Constants.WorkflowStates.Created,
-                Name = "Name",
-                SurveyId = 1,
-                Version = 1,
-            };
+            var dashboard = DashboardHelpers.GetNewDashboard();
 
             await dashboard.Create(DbContext);
 
@@ -118,11 +98,14 @@ namespace Microting.InsightDashboardBase.Tests
             Assert.AreEqual(2, dbDashboard.Version);
             Assert.AreEqual(dashboard.WorkflowState, dbDashboard.WorkflowState);
             Assert.AreEqual(dashboard.UpdatedByUserId, dbDashboard.UpdatedByUserId);
+            Assert.AreEqual(dashboard.Name, dbDashboard.Name);
+            Assert.AreEqual(dashboard.LocationId, dbDashboard.LocationId);
+            Assert.AreEqual(dashboard.TagId, dbDashboard.TagId);
 
             Assert.AreEqual(dashboard.Id, dashboardVersion[0].DashboardId);
             Assert.AreEqual(1, dashboardVersion[0].Version);
             Assert.AreEqual(dashboard.WorkflowState, dashboardVersion[0].WorkflowState);
-            Assert.AreEqual(dashboard.CreatedAt.ToString(), dashboardVersion[0].CreatedAt.ToString());
+            Assert.AreEqual(dashboard.CreatedAt.ToString(CultureInfo.InvariantCulture), dashboardVersion[0].CreatedAt.ToString(CultureInfo.InvariantCulture));
             Assert.AreEqual(dashboard.CreatedByUserId, dashboardVersion[0].CreatedByUserId);
             Assert.AreEqual(oldUpdatedAt.ToString(), dashboardVersion[0].UpdatedAt.ToString());
             Assert.AreEqual(dashboard.UpdatedByUserId, dashboardVersion[0].UpdatedByUserId);
@@ -130,7 +113,7 @@ namespace Microting.InsightDashboardBase.Tests
             Assert.AreEqual(dashboard.Id, dashboardVersion[1].DashboardId);
             Assert.AreEqual(2, dashboardVersion[1].Version);
             Assert.AreEqual(dashboard.WorkflowState, dashboardVersion[1].WorkflowState);
-            Assert.AreEqual(dashboard.CreatedAt.ToString(), dashboardVersion[1].CreatedAt.ToString());
+            Assert.AreEqual(dashboard.CreatedAt.ToString(CultureInfo.InvariantCulture), dashboardVersion[1].CreatedAt.ToString(CultureInfo.InvariantCulture));
             Assert.AreEqual(dashboard.CreatedByUserId, dashboardVersion[1].CreatedByUserId);
             Assert.AreEqual(dashboard.UpdatedByUserId, dashboardVersion[1].UpdatedByUserId);
         }
@@ -139,19 +122,7 @@ namespace Microting.InsightDashboardBase.Tests
         public async Task Dashboard_Delete_DoesDelete()
         {
             // Arrange
-            Random rnd = new Random();
-
-            Dashboard dashboard = new Dashboard
-            {
-                UpdatedByUserId = rnd.Next(1, 255),
-                CreatedByUserId = rnd.Next(1, 255),
-                CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.UtcNow,
-                WorkflowState = Constants.WorkflowStates.Created,
-                Name = "Name",
-                SurveyId = 1,
-                Version = 1,
-            };
+            var dashboard = DashboardHelpers.GetNewDashboard();
 
             await dashboard.Create(DbContext);
 
@@ -172,14 +143,14 @@ namespace Microting.InsightDashboardBase.Tests
             Assert.AreEqual(dashboard.Id, dbDashboard.Id);
             Assert.AreEqual(2, dbDashboard.Version);
             Assert.AreEqual(Constants.WorkflowStates.Removed, dbDashboard.WorkflowState);
-            Assert.AreEqual(dashboard.CreatedAt.ToString(), dbDashboard.CreatedAt.ToString());
+            Assert.AreEqual(dashboard.CreatedAt.ToString(CultureInfo.InvariantCulture), dbDashboard.CreatedAt.ToString(CultureInfo.InvariantCulture));
             Assert.AreEqual(dashboard.CreatedByUserId, dbDashboard.CreatedByUserId);
             Assert.AreEqual(dashboard.UpdatedByUserId, dbDashboard.UpdatedByUserId);
 
             Assert.AreEqual(dashboard.Id, dashboardVersion[0].DashboardId);
             Assert.AreEqual(1, dashboardVersion[0].Version);
             Assert.AreEqual(Constants.WorkflowStates.Created, dashboardVersion[0].WorkflowState);
-            Assert.AreEqual(dashboard.CreatedAt.ToString(), dashboardVersion[0].CreatedAt.ToString());
+            Assert.AreEqual(dashboard.CreatedAt.ToString(CultureInfo.InvariantCulture), dashboardVersion[0].CreatedAt.ToString(CultureInfo.InvariantCulture));
             Assert.AreEqual(dashboard.CreatedByUserId, dashboardVersion[0].CreatedByUserId);
             Assert.AreEqual(oldUpdatedAt.ToString(), dashboardVersion[0].UpdatedAt.ToString());
             Assert.AreEqual(dashboard.UpdatedByUserId, dashboardVersion[0].UpdatedByUserId);
@@ -187,7 +158,7 @@ namespace Microting.InsightDashboardBase.Tests
             Assert.AreEqual(dashboard.Id, dashboardVersion[1].DashboardId);
             Assert.AreEqual(2, dashboardVersion[1].Version);
             Assert.AreEqual(Constants.WorkflowStates.Removed, dashboardVersion[1].WorkflowState);
-            Assert.AreEqual(dashboard.CreatedAt.ToString(), dashboardVersion[1].CreatedAt.ToString());
+            Assert.AreEqual(dashboard.CreatedAt.ToString(CultureInfo.InvariantCulture), dashboardVersion[1].CreatedAt.ToString(CultureInfo.InvariantCulture));
             Assert.AreEqual(dashboard.CreatedByUserId, dashboardVersion[1].CreatedByUserId);
             Assert.AreEqual(dashboard.UpdatedByUserId, dashboardVersion[1].UpdatedByUserId);
         }
