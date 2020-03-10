@@ -46,8 +46,6 @@ namespace Microting.InsightDashboardBase.Tests.Helpers
                 WorkflowState = Constants.WorkflowStates.Created,
                 Name = "Name",
                 SurveyId = 1,
-                TagId = 1,
-                LocationId = 1,
             };
 
             return dashboard;

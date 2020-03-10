@@ -68,8 +68,6 @@ namespace Microting.InsightDashboardBase.Tests
             Assert.AreEqual(dashboard.UpdatedByUserId, dbDashboard.UpdatedByUserId);
             Assert.AreEqual(dashboard.Name, dbDashboard.Name);
             Assert.AreEqual(dashboard.SurveyId, dbDashboard.SurveyId);
-            Assert.AreEqual(dashboard.TagId, dbDashboard.TagId);
-            Assert.AreEqual(dashboard.LocationId, dbDashboard.LocationId);
         }
 
         [Test]
