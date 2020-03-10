@@ -24,6 +24,7 @@ SOFTWARE.
 
 namespace Microting.InsightDashboardBase.Infrastructure.Data.Entities
 {
+    using System;
     using System.ComponentModel.DataAnnotations;
     using eFormApi.BasePn.Infrastructure.Database.Base;
 
@@ -34,6 +35,9 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data.Entities
         public int SurveyId { get; set; }
         public int? LocationId { get; set; } // Site id
         public int? TagId { get; set; } // Tag id
+        public DateTime? DateFrom { get; set; }
+        public DateTime? DateTo { get; set; }
+        public bool Today { get; set; }
         public int DashboardId { get; set; }
         public virtual Dashboard Dashboard { get; set; }
     }

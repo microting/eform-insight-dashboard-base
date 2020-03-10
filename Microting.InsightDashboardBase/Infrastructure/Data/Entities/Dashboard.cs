@@ -39,6 +39,9 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data.Entities
         public int SurveyId { get; set; } // Question set
         public int? LocationId { get; set; } // Site id
         public int? TagId { get; set; } // Tag id
+        public DateTime? DateFrom { get; set; }
+        public DateTime? DateTo { get; set; }
+        public bool Today { get; set; }
 
         public virtual List<DashboardItem> DashboardItems { get; set; }
             = new List<DashboardItem>();
@@ -49,8 +52,6 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data.Entities
             {
                 Name = Name,
                 SurveyId = SurveyId,
-                LocationId = LocationId,
-                TagId = TagId,
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow,
                 Version = 1,
@@ -84,6 +85,9 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data.Entities
             dashboard.SurveyId = SurveyId;
             dashboard.LocationId = LocationId;
             dashboard.TagId = TagId;
+            dashboard.DateFrom = DateFrom;
+            dashboard.DateTo = DateTo;
+            dashboard.Today = Today;
 
             if (dbContext.ChangeTracker.HasChanges())
             {
@@ -131,6 +135,9 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data.Entities
                 SurveyId = dashboard.SurveyId,
                 LocationId = dashboard.LocationId,
                 TagId = dashboard.TagId,
+                DateFrom = dashboard.DateFrom,
+                DateTo = dashboard.DateTo,
+                Today = dashboard.Today,
             };
 
             return dashboardVersion;
