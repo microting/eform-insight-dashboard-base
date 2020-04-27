@@ -4,6 +4,8 @@
     {
         Line = 1,
         Pie,
+        AdvancedPie,
+        PieGrid,
         HorizontalBar,
         HorizontalBarStacked,
         HorizontalBarGrouped,
