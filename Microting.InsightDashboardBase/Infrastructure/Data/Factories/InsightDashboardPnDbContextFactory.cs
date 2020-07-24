@@ -33,27 +33,13 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data.Factories
     {
         public InsightDashboardPnDbContext CreateDbContext(string[] args)
         {
-            //args = new[] { "Data Source=.\\SQLEXPRESS;Database=insight-dashboard-pl;Integrated Security=True" };
+            var defaultCs = "Server = localhost; port = 3306; Database = insight-pn; user = root; Convert Zero Datetime = true;";
             var optionsBuilder = new DbContextOptionsBuilder<InsightDashboardPnDbContext>();
-            if (args.Any())
-            {
-                if (args.FirstOrDefault().ToLower().Contains("convert zero datetime"))
-                {
-                    optionsBuilder.UseMySql(args.FirstOrDefault());
-                }
-                else
-                {
-                    optionsBuilder.UseSqlServer(args.FirstOrDefault());
-                }
-            }
-            else
-            {
-                throw new ArgumentNullException("Connection string not present");
-            }
-            //optionsBuilder.UseSqlServer(@"data source=(LocalDb)\SharedInstance;Initial catalog=insight-dashboard-base-tests;Integrated Security=True");
-            //dotnet ef migrations add InitialCreate--project Microting.InsightDashboardBase--startup - project DBMigrator
+            optionsBuilder.UseMySql(args.Any() ? args[0]: defaultCs);
             optionsBuilder.UseLazyLoadingProxies(true);
+
             return new InsightDashboardPnDbContext(optionsBuilder.Options);
+            //dotnet ef migrations add InitialCreate--project Microting.InsightDashboardBase--startup - project DBMigrator
         }
     }
 }
