@@ -22,6 +22,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using Pomelo.EntityFrameworkCore.MySql.Storage;
+
 namespace Microting.InsightDashboardBase.Infrastructure.Data.Factories
 {
     using System;
@@ -35,11 +38,14 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data.Factories
         {
             var defaultCs = "Server = localhost; port = 3306; Database = insight-pn; user = root; Convert Zero Datetime = true;";
             var optionsBuilder = new DbContextOptionsBuilder<InsightDashboardPnDbContext>();
-            optionsBuilder.UseMySql(args.Any() ? args[0]: defaultCs);
+            optionsBuilder.UseMySql(args.Any() ? args[0] : defaultCs, mysqlOptions =>
+                {
+                    mysqlOptions.ServerVersion(new Version(10, 4, 0), ServerType.MariaDb);
+                });
             optionsBuilder.UseLazyLoadingProxies(true);
 
             return new InsightDashboardPnDbContext(optionsBuilder.Options);
-            //dotnet ef migrations add InitialCreate--project Microting.InsightDashboardBase--startup - project DBMigrator
+            // dotnet ef migrations add InitialCreate--project Microting.InsightDashboardBase--startup - project DBMigrator
         }
     }
 }
