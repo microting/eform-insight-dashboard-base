@@ -36,7 +36,7 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data.Factories
     {
         public InsightDashboardPnDbContext CreateDbContext(string[] args)
         {
-            var defaultCs = "Server = localhost; port = 3306; Database = insight-pn; user = root; Convert Zero Datetime = true;";
+            var defaultCs = "Server = localhost; port = 3306; Database = insight-pn; user = root; password = secretpassword; Convert Zero Datetime = true;";
             var optionsBuilder = new DbContextOptionsBuilder<InsightDashboardPnDbContext>();
             optionsBuilder.UseMySql(args.Any() ? args[0] : defaultCs, mysqlOptions =>
                 {
