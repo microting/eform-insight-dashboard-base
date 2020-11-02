@@ -61,7 +61,7 @@ namespace Microting.InsightDashboardBase.Tests.Base
             else
             {
                 _connectionString =
-                    @"Server = localhost; port = 3306; Database = insight-dashboard-base-tests; user = root; Convert Zero Datetime = true;";
+                    @"Server = localhost; port = 3306; Database = insight-dashboard-base-tests; password = secretpassword; user = root; Convert Zero Datetime = true;";
             }
 
             try
