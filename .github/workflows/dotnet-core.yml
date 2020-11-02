@@ -40,7 +40,7 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Unit Tests
-      run: dotnet test --no-restore -c Release -v n Microting.InsightDashboardBase.Unit.Tests/Microting.InsightDashboardBase.Tests.csproj
+      run: dotnet test --no-restore -c Release -v n Microting.InsightDashboardBase.Tests/Microting.InsightDashboardBase.Tests.csproj
     - name: Pack
       run: dotnet pack Microting.InsightDashboardBase.sln -c Release -o ./artifacts -p:PackageVersion=${{ steps.get_version.outputs.VERSION }}
     - name: Push generated package to GitHub registry
