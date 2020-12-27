@@ -84,7 +84,7 @@ namespace Microting.InsightDashboardBase.Tests.Helpers
 
             // Dashboard item
             var dashboardItem = GetNewDashboardItem(dashboard.Id);
-            await dashboardItem.Save(dbContext);
+            await dashboardItem.Create(dbContext);
 
             return dashboardItem;
         }
@@ -108,7 +108,7 @@ namespace Microting.InsightDashboardBase.Tests.Helpers
                 DashboardItemId = dashboardItem.Id,
             };
 
-            await dashboardItemCompare.Save(dbContext);;
+            await dashboardItemCompare.Create(dbContext);;
 
             return dashboardItemCompare;
         }
@@ -130,7 +130,7 @@ namespace Microting.InsightDashboardBase.Tests.Helpers
                 AnswerId = 1,
             };
 
-            await dashboardItemIgnoredAnswer.Save(dbContext); ;
+            await dashboardItemIgnoredAnswer.Create(dbContext); ;
 
             return dashboardItemIgnoredAnswer;
         }

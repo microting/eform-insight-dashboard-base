@@ -81,6 +81,7 @@ namespace Microting.InsightDashboardBase.Tests
             // Act
             var oldUpdatedAt = dashboardItem.UpdatedAt.GetValueOrDefault();
 
+            dashboardItem.Position = 0;
             await dashboardItem.Update(DbContext);
 
             // Assert
@@ -97,7 +98,7 @@ namespace Microting.InsightDashboardBase.Tests
             Assert.AreEqual(dashboardItem.WorkflowState, dbDashboardItem.WorkflowState);
             Assert.AreEqual(dashboardItem.UpdatedByUserId, dbDashboardItem.UpdatedByUserId);
 
-            Assert.AreEqual(dashboardItem.Position, dbDashboardItem.Position);
+            Assert.AreEqual(0, dbDashboardItem.Position);
             Assert.AreEqual(dashboardItem.CalculateAverage, dbDashboardItem.CalculateAverage);
             Assert.AreEqual(dashboardItem.ChartType, dbDashboardItem.ChartType);
             Assert.AreEqual(dashboardItem.CompareEnabled, dbDashboardItem.CompareEnabled);
@@ -113,7 +114,7 @@ namespace Microting.InsightDashboardBase.Tests
             Assert.AreEqual(oldUpdatedAt.ToString(), dashboardItemVersions[0].UpdatedAt.ToString());
             Assert.AreEqual(dashboardItem.UpdatedByUserId, dashboardItemVersions[0].UpdatedByUserId);
 
-            Assert.AreEqual(dashboardItem.Position, dashboardItemVersions[0].Position);
+            Assert.AreEqual(1, dashboardItemVersions[0].Position);
             Assert.AreEqual(dashboardItem.CalculateAverage, dashboardItemVersions[0].CalculateAverage);
             Assert.AreEqual(dashboardItem.ChartType, dashboardItemVersions[0].ChartType);
             Assert.AreEqual(dashboardItem.CompareEnabled, dashboardItemVersions[0].CompareEnabled);
@@ -129,7 +130,7 @@ namespace Microting.InsightDashboardBase.Tests
             Assert.AreEqual(dashboardItem.CreatedByUserId, dashboardItemVersions[1].CreatedByUserId);
             Assert.AreEqual(dashboardItem.UpdatedByUserId, dashboardItemVersions[1].UpdatedByUserId);
 
-            Assert.AreEqual(dashboardItem.Position, dashboardItemVersions[1].Position);
+            Assert.AreEqual(0, dashboardItemVersions[1].Position);
             Assert.AreEqual(dashboardItem.CalculateAverage, dashboardItemVersions[1].CalculateAverage);
             Assert.AreEqual(dashboardItem.ChartType, dashboardItemVersions[1].ChartType);
             Assert.AreEqual(dashboardItem.CompareEnabled, dashboardItemVersions[1].CompareEnabled);

@@ -42,7 +42,6 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data.Factories
                 {
                     mysqlOptions.ServerVersion(new Version(10, 4, 0), ServerType.MariaDb);
                 });
-            optionsBuilder.UseLazyLoadingProxies(true);
 
             return new InsightDashboardPnDbContext(optionsBuilder.Options);
             // dotnet ef migrations add InitialCreate--project Microting.InsightDashboardBase--startup - project DBMigrator

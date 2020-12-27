@@ -30,49 +30,10 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data.Entities
     using eFormApi.BasePn.Infrastructure.Database.Base;
     using Microsoft.EntityFrameworkCore;
 
-    public class DashboardItemIgnoredAnswer : BaseEntity
+    public class DashboardItemIgnoredAnswer : PnBase
     {
         public int AnswerId { get; set; }
         public int DashboardItemId { get; set; }
         public virtual DashboardItem DashboardItem { get; set; }
-
-        public async Task Save(InsightDashboardPnDbContext dbContext)
-        {
-            var dashboardReportTag = new DashboardItemIgnoredAnswer
-            {
-                CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.UtcNow,
-                Version = 1,
-                WorkflowState = Constants.WorkflowStates.Created,
-                UpdatedByUserId = UpdatedByUserId,
-                CreatedByUserId = CreatedByUserId,
-                DashboardItemId = DashboardItemId,
-                AnswerId = AnswerId,
-            };
-
-            await dbContext.DashboardItemIgnoredAnswers.AddAsync(dashboardReportTag);
-            await dbContext.SaveChangesAsync();
-
-            Id = dashboardReportTag.Id;
-        }
-
-        public async Task Delete(InsightDashboardPnDbContext dbContext)
-        {
-            var dashboardReportTag = await dbContext.DashboardItemIgnoredAnswers
-                .FirstOrDefaultAsync(x => x.Id == Id);
-
-            if (dashboardReportTag == null)
-            {
-                throw new NullReferenceException($"Could not find ignoredAnswer with id: {Id}");
-            }
-
-            dashboardReportTag.WorkflowState = Constants.WorkflowStates.Removed;
-            dashboardReportTag.UpdatedAt = DateTime.UtcNow;
-            dashboardReportTag.Version += 1;
-            dashboardReportTag.AnswerId = AnswerId;
-
-            dbContext.DashboardItemIgnoredAnswers.Update(dashboardReportTag);
-            await dbContext.SaveChangesAsync();
-        }
     }
 }

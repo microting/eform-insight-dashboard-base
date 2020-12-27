@@ -42,7 +42,9 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data
         public DbSet<DashboardItem> DashboardItems { get; set; }
         public DbSet<DashboardItemVersion> DashboardItemVersions { get; set; }
         public DbSet<DashboardItemCompare> DashboardItemCompares { get; set; }
+        public DbSet<DashboardItemCompareVersion> DashboardItemCompareVersions { get; set; }
         public DbSet<DashboardItemIgnoredAnswer> DashboardItemIgnoredAnswers { get; set; }
+        public DbSet<DashboardItemIgnoredAnswerVersion> DashboardItemIgnoredAnswerVersions { get; set; }
 
         // default tables
         public DbSet<PluginConfigurationValue> PluginConfigurationValues { get; set; }

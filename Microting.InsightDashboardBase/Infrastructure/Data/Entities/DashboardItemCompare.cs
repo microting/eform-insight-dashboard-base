@@ -30,53 +30,12 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data.Entities
     using eFormApi.BasePn.Infrastructure.Database.Base;
     using Microsoft.EntityFrameworkCore;
 
-    public class DashboardItemCompare : BaseEntity
+    public class DashboardItemCompare : PnBase
     {
         public int? LocationId { get; set; }
         public int? TagId { get; set; }
         public int Position { get; set; }
         public int DashboardItemId { get; set; }
         public virtual DashboardItem DashboardItem { get; set; }
-
-        public async Task Save(InsightDashboardPnDbContext dbContext)
-        {
-            var dashboardLocation = new DashboardItemCompare
-            {
-                CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.UtcNow,
-                Version = 1,
-                WorkflowState = Constants.WorkflowStates.Created,
-                UpdatedByUserId = UpdatedByUserId,
-                CreatedByUserId = CreatedByUserId,
-                DashboardItemId = DashboardItemId,
-                LocationId = LocationId,
-                Position = Position,
-                TagId = TagId,
-            };
-
-            await dbContext.DashboardItemCompares.AddAsync(dashboardLocation);
-            await dbContext.SaveChangesAsync();
-
-            Id = dashboardLocation.Id;
-        }
-
-        public async Task Delete(InsightDashboardPnDbContext dbContext)
-        {
-            var dashboardLocation = await dbContext.DashboardItemCompares
-                .FirstOrDefaultAsync(x => x.Id == Id);
-
-            if (dashboardLocation == null)
-            {
-                throw new NullReferenceException($"Could not find dashboardItemCompare with id: {Id}");
-            }
-
-            dashboardLocation.WorkflowState = Constants.WorkflowStates.Removed;
-            dashboardLocation.UpdatedAt = DateTime.UtcNow;
-            dashboardLocation.Version += 1;
-            dashboardLocation.LocationId = LocationId;
-
-            dbContext.DashboardItemCompares.Update(dashboardLocation);
-            await dbContext.SaveChangesAsync();
-        }
     }
 }
