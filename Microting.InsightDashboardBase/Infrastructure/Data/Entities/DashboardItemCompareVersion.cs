@@ -22,10 +22,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace Microting.InsightDashboardBase
+using Microting.eFormApi.BasePn.Infrastructure.Database.Base;
+
+namespace Microting.InsightDashboardBase.Infrastructure.Data.Entities
 {
-    internal class DbConfig
+    public class DashboardItemCompareVersion : BaseEntity
     {
-        public static bool IsMySQL = false;
+        public int? LocationId { get; set; }
+        public int? TagId { get; set; }
+        public int Position { get; set; }
+        public int DashboardItemId { get; set; }
+        public int DashboardItemCompareId { get; set; }
     }
 }

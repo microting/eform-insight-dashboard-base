@@ -1,7 +1,7 @@
 /*
 The MIT License (MIT)
 
-Copyright (c) 2007 - 2019 Microting A/S
+Copyright (c) 2007 - 2021 Microting A/S
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -81,6 +81,7 @@ namespace Microting.InsightDashboardBase.Tests
             // Act
             var oldUpdatedAt = dashboard.UpdatedAt.GetValueOrDefault();
 
+            dashboard.Name += " - Updated";
             await dashboard.Update(DbContext);
 
             // Assert
@@ -105,6 +106,7 @@ namespace Microting.InsightDashboardBase.Tests
             Assert.AreEqual(dashboard.WorkflowState, dashboardVersion[0].WorkflowState);
             Assert.AreEqual(dashboard.CreatedAt.ToString(CultureInfo.InvariantCulture), dashboardVersion[0].CreatedAt.ToString(CultureInfo.InvariantCulture));
             Assert.AreEqual(dashboard.CreatedByUserId, dashboardVersion[0].CreatedByUserId);
+            Assert.AreEqual("Name", dashboardVersion[0].Name);
             Assert.AreEqual(oldUpdatedAt.ToString(), dashboardVersion[0].UpdatedAt.ToString());
             Assert.AreEqual(dashboard.UpdatedByUserId, dashboardVersion[0].UpdatedByUserId);
 
@@ -113,6 +115,7 @@ namespace Microting.InsightDashboardBase.Tests
             Assert.AreEqual(dashboard.WorkflowState, dashboardVersion[1].WorkflowState);
             Assert.AreEqual(dashboard.CreatedAt.ToString(CultureInfo.InvariantCulture), dashboardVersion[1].CreatedAt.ToString(CultureInfo.InvariantCulture));
             Assert.AreEqual(dashboard.CreatedByUserId, dashboardVersion[1].CreatedByUserId);
+            Assert.AreEqual("Name - Updated", dashboardVersion[1].Name);
             Assert.AreEqual(dashboard.UpdatedByUserId, dashboardVersion[1].UpdatedByUserId);
         }
 

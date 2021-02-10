@@ -26,19 +26,21 @@ SOFTWARE.
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Microting.InsightDashboardBase.Infrastructure.Data;
 
 namespace Microting.InsightDashboardBase.Migrations
 {
     [DbContext(typeof(InsightDashboardPnDbContext))]
-    partial class InsightDashboardPnDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200724110507_FixingMigrations")]
+    partial class FixingMigrations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.8")
+                .HasAnnotation("ProductVersion", "3.1.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("Microting.InsightDashboardBase.Infrastructure.Data.Entities.Dashboard", b =>
@@ -214,51 +216,6 @@ namespace Microting.InsightDashboardBase.Migrations
                     b.ToTable("DashboardItemCompares");
                 });
 
-            modelBuilder.Entity("Microting.InsightDashboardBase.Infrastructure.Data.Entities.DashboardItemCompareVersion", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("CreatedByUserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DashboardItemCompareId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DashboardItemId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("LocationId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Position")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TagId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("UpdatedByUserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Version")
-                        .HasColumnType("int");
-
-                    b.Property<string>("WorkflowState")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4")
-                        .HasMaxLength(255);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DashboardItemCompareVersions");
-                });
-
             modelBuilder.Entity("Microting.InsightDashboardBase.Infrastructure.Data.Entities.DashboardItemIgnoredAnswer", b =>
                 {
                     b.Property<int>("Id")
@@ -297,45 +254,6 @@ namespace Microting.InsightDashboardBase.Migrations
                     b.HasIndex("DashboardItemId");
 
                     b.ToTable("DashboardItemIgnoredAnswers");
-                });
-
-            modelBuilder.Entity("Microting.InsightDashboardBase.Infrastructure.Data.Entities.DashboardItemIgnoredAnswerVersion", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("AnswerId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("CreatedByUserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DashboardItemId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DashboardItemIgnoredAnswerId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("UpdatedByUserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Version")
-                        .HasColumnType("int");
-
-                    b.Property<string>("WorkflowState")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4")
-                        .HasMaxLength(255);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DashboardItemIgnoredAnswerVersions");
                 });
 
             modelBuilder.Entity("Microting.InsightDashboardBase.Infrastructure.Data.Entities.DashboardItemVersion", b =>

@@ -1,7 +1,7 @@
 /*
 The MIT License (MIT)
 
-Copyright (c) 2007 - 2019 Microting A/S
+Copyright (c) 2007 - 2021 Microting A/S
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,6 +21,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
+
+using System.Threading.Tasks;
 
 namespace Microting.InsightDashboardBase.Tests.Base
 {
@@ -50,19 +52,10 @@ namespace Microting.InsightDashboardBase.Tests.Base
         }
 
         [SetUp]
-        public void Setup()
+        public async Task Setup()
         {
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            {
-
-                _connectionString = @"data source=(LocalDb)\SharedInstance;Initial catalog=insight-dashboard-base-tests;Integrated Security=true";
-                //_connectionString = @"Data Source=.\SQLEXPRESS;Database=insight-dashboard-pl-test;Integrated Security=True";
-            }
-            else
-            {
-                _connectionString =
-                    @"Server = localhost; port = 3306; Database = insight-dashboard-base-tests; user = root; Convert Zero Datetime = true;";
-            }
+            _connectionString =
+                @"Server = localhost; port = 3306; Database = insight-dashboard-base-tests; password = secretpassword; user = root; Convert Zero Datetime = true;";
 
             try
             {
@@ -74,56 +67,49 @@ namespace Microting.InsightDashboardBase.Tests.Base
                 throw;
             }
 
-
             DbContext.Database.SetCommandTimeout(300);
 
             try
             {
-                ClearDb();
+                await ClearDb();
             }
             catch
             {
-                DbContext.Database.Migrate();
+                await DbContext.Database.MigrateAsync();
             }
 
             DoSetup();
         }
 
         [TearDown]
-        public void TearDown()
+        public async Task TearDown()
         {
-            ClearDb();
+            await ClearDb();
 
             ClearFile();
 
-            DbContext.Dispose();
+            await DbContext.DisposeAsync();
         }
 
-        private void ClearDb()
+        private async Task ClearDb()
         {
-            List<string> modelNames = new List<string>();
-            modelNames.Add(nameof(InsightDashboardPnDbContext.DashboardItemCompares));
-            modelNames.Add(nameof(InsightDashboardPnDbContext.DashboardItemIgnoredAnswers));
-            modelNames.Add(nameof(InsightDashboardPnDbContext.DashboardItemVersions));
-            modelNames.Add(nameof(InsightDashboardPnDbContext.DashboardItems));
-            modelNames.Add(nameof(InsightDashboardPnDbContext.DashboardVersions));
-            modelNames.Add(nameof(InsightDashboardPnDbContext.Dashboards));
+            List<string> modelNames = new List<string>
+            {
+                nameof(InsightDashboardPnDbContext.DashboardItemCompareVersions),
+                nameof(InsightDashboardPnDbContext.DashboardItemCompares),
+                nameof(InsightDashboardPnDbContext.DashboardItemIgnoredAnswerVersions),
+                nameof(InsightDashboardPnDbContext.DashboardItemIgnoredAnswers),
+                nameof(InsightDashboardPnDbContext.DashboardItemVersions),
+                nameof(InsightDashboardPnDbContext.DashboardItems),
+                nameof(InsightDashboardPnDbContext.DashboardVersions),
+                nameof(InsightDashboardPnDbContext.Dashboards)
+            };
 
             foreach (var modelName in modelNames)
             {
                 try
                 {
-                    string sqlCmd;
-                    if (DbContext.Database.IsMySql())
-                    {
-                        sqlCmd = $"SET FOREIGN_KEY_CHECKS = 0;TRUNCATE `insight-dashboard-base-tests`.`{modelName}`";
-                    }
-                    else
-                    {
-                        sqlCmd = $"DELETE FROM [{modelName}]";
-                    }
-
-                    DbContext.Database.ExecuteSqlCommand(sqlCmd);
+                    await DbContext.Database.ExecuteSqlRawAsync($"SET FOREIGN_KEY_CHECKS = 0;TRUNCATE `insight-dashboard-base-tests`.`{modelName}`");
                 }
                 catch (Exception ex)
                 {
@@ -132,14 +118,14 @@ namespace Microting.InsightDashboardBase.Tests.Base
             }
         }
 
-        private string path;
+        private string _path;
 
         private void ClearFile()
         {
-            path = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
-            path = Path.GetDirectoryName(path).Replace(@"file:\", "");
+            _path = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
+            _path = Path.GetDirectoryName(_path)?.Replace(@"file:\", "");
 
-            string picturePath = path + @"\output\dataFolder\picture\Deleted";
+            string picturePath = _path + @"\output\dataFolder\picture\Deleted";
 
             DirectoryInfo diPic = new DirectoryInfo(picturePath);
 
@@ -149,7 +135,11 @@ namespace Microting.InsightDashboardBase.Tests.Base
                 {
                     file.Delete();
                 }
-            } catch { }
+            }
+            catch
+            {
+                // ignored
+            }
         }
 
         protected virtual void DoSetup() { }

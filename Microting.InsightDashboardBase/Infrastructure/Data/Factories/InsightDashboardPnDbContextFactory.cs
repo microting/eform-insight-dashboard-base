@@ -1,7 +1,7 @@
 /*
 The MIT License (MIT)
 
-Copyright (c) 2007 - 2019 Microting A/S
+Copyright (c) 2007 - 2021 Microting A/S
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,6 +22,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using Pomelo.EntityFrameworkCore.MySql.Storage;
+
 namespace Microting.InsightDashboardBase.Infrastructure.Data.Factories
 {
     using System;
@@ -33,27 +36,15 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data.Factories
     {
         public InsightDashboardPnDbContext CreateDbContext(string[] args)
         {
-            //args = new[] { "Data Source=.\\SQLEXPRESS;Database=insight-dashboard-pl;Integrated Security=True" };
+            var defaultCs = "Server = localhost; port = 3306; Database = insight-pn; user = root; password = secretpassword; Convert Zero Datetime = true;";
             var optionsBuilder = new DbContextOptionsBuilder<InsightDashboardPnDbContext>();
-            if (args.Any())
-            {
-                if (args.FirstOrDefault().ToLower().Contains("convert zero datetime"))
+            optionsBuilder.UseMySql(args.Any() ? args[0] : defaultCs, mysqlOptions =>
                 {
-                    optionsBuilder.UseMySql(args.FirstOrDefault());
-                }
-                else
-                {
-                    optionsBuilder.UseSqlServer(args.FirstOrDefault());
-                }
-            }
-            else
-            {
-                throw new ArgumentNullException("Connection string not present");
-            }
-            //optionsBuilder.UseSqlServer(@"data source=(LocalDb)\SharedInstance;Initial catalog=insight-dashboard-base-tests;Integrated Security=True");
-            //dotnet ef migrations add InitialCreate--project Microting.InsightDashboardBase--startup - project DBMigrator
-            optionsBuilder.UseLazyLoadingProxies(true);
+                    mysqlOptions.ServerVersion(new Version(10, 4, 0), ServerType.MariaDb);
+                });
+
             return new InsightDashboardPnDbContext(optionsBuilder.Options);
+            // dotnet ef migrations add InitialCreate--project Microting.InsightDashboardBase--startup - project DBMigrator
         }
     }
 }

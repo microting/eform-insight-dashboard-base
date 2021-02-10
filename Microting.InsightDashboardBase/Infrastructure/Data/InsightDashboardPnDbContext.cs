@@ -1,7 +1,7 @@
 /*
 The MIT License (MIT)
 
-Copyright (c) 2007 - 2019 Microting A/S
+Copyright (c) 2007 - 2021 Microting A/S
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -42,7 +42,9 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data
         public DbSet<DashboardItem> DashboardItems { get; set; }
         public DbSet<DashboardItemVersion> DashboardItemVersions { get; set; }
         public DbSet<DashboardItemCompare> DashboardItemCompares { get; set; }
+        public DbSet<DashboardItemCompareVersion> DashboardItemCompareVersions { get; set; }
         public DbSet<DashboardItemIgnoredAnswer> DashboardItemIgnoredAnswers { get; set; }
+        public DbSet<DashboardItemIgnoredAnswerVersion> DashboardItemIgnoredAnswerVersions { get; set; }
 
         // default tables
         public DbSet<PluginConfigurationValue> PluginConfigurationValues { get; set; }
@@ -84,12 +86,6 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data
 
             modelBuilder.Entity<DashboardItemIgnoredAnswer>()
                 .HasIndex(x => x.AnswerId);
-
-            modelBuilder.Entity<PluginGroupPermissionVersion>()
-                .HasOne(x => x.PluginGroupPermission)
-                .WithMany()
-                .HasForeignKey("FK_PluginGroupPermissionVersions_PluginGroupPermissionId")
-                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
