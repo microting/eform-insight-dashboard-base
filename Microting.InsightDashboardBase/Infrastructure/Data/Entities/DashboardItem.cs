@@ -1,4 +1,4 @@
-/*
+﻿/*
 The MIT License (MIT)
 
 Copyright (c) 2007 - 2021 Microting A/S
@@ -24,25 +24,31 @@ SOFTWARE.
 
 namespace Microting.InsightDashboardBase.Infrastructure.Data.Entities
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using eForm.Infrastructure.Constants;
-    using eFormApi.BasePn.Infrastructure.Database.Base;
     using Enums;
-    using Microsoft.EntityFrameworkCore;
+    using System.Collections.Generic;
 
     public class DashboardItem : PnBase
     {
         public int FirstQuestionId { get; set; } // questions.id
+
         public int? FilterQuestionId { get; set; } // questions.id
+
         public int? FilterAnswerId { get; set; } // options.id
+
         public DashboardPeriodUnits Period { get; set; }
+
         public DashboardChartTypes ChartType { get; set; }
+
         public bool CompareEnabled { get; set; }
+
         public bool CalculateAverage { get; set; }
+
         public int Position { get; set; }
+
         public int DashboardId { get; set; }
+
+        public bool CalculateByWeight { get; set; }
+
         public virtual Dashboard Dashboard { get; set; }
 
         public virtual List<DashboardItemCompare> CompareLocationsTags { get; set; }
