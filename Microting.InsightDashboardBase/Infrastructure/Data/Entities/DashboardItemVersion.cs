@@ -30,14 +30,25 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data.Entities
     public class DashboardItemVersion : BaseEntity
     {
         public int FirstQuestionId { get; set; } // questions.id
+
         public int? FilterQuestionId { get; set; } // questions.id
+
         public int? FilterAnswerId { get; set; } // options.id
+
         public DashboardPeriodUnits Period { get; set; }
+
         public DashboardChartTypes ChartType { get; set; }
+
         public bool CompareEnabled { get; set; }
+
         public bool CalculateAverage { get; set; }
+
         public int Position { get; set; }
+
         public int DashboardItemId { get; set; }
+
         public virtual DashboardItem DashboardItem { get; set; }
+
+        public bool CalculateByWeight { get; set; }
     }
 }

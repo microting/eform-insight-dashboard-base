@@ -1,4 +1,4 @@
-/*
+﻿/*
 The MIT License (MIT)
 
 Copyright (c) 2007 - 2021 Microting A/S
@@ -27,10 +27,6 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data.Entities
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Threading.Tasks;
-    using eForm.Infrastructure.Constants;
-    using eFormApi.BasePn.Infrastructure.Database.Base;
-    using Microsoft.EntityFrameworkCore;
 
     public class Dashboard : PnBase
     {
