@@ -104,16 +104,28 @@ namespace Microting.InsightDashboardBase.Tests.Base
                 nameof(InsightDashboardPnDbContext.DashboardVersions),
                 nameof(InsightDashboardPnDbContext.Dashboards)
             };
+            bool firstRunNotDone = true;
 
             foreach (var modelName in modelNames)
             {
                 try
                 {
-                    await DbContext.Database.ExecuteSqlRawAsync($"SET FOREIGN_KEY_CHECKS = 0;TRUNCATE `insight-dashboard-base-tests`.`{modelName}`");
+                    if (firstRunNotDone)
+                    {
+                        await DbContext.Database.ExecuteSqlRawAsync(
+                            $"SET FOREIGN_KEY_CHECKS = 0;TRUNCATE `insight-dashboard-base-tests`.`{modelName}`");
+                    }
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    if (ex.Message == "Unknown database 'insight-dashboard-base-tests'")
+                    {
+                        firstRunNotDone = false;
+                    }
+                    else
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
                 }
             }
         }

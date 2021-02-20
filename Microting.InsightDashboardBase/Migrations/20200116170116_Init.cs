@@ -33,7 +33,7 @@ namespace Microting.InsightDashboardBase.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             var autoIdGenStrategy = "SqlServer:ValueGenerationStrategy";
-            object autoIdGenStrategyValue = SqlServerValueGenerationStrategy.IdentityColumn;
+            object autoIdGenStrategyValue = MySqlValueGenerationStrategy.IdentityColumn;
 
             // Setup for MySQL Provider
             if (migrationBuilder.ActiveProvider == "Pomelo.EntityFrameworkCore.MySql")

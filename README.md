@@ -1,7 +1,8 @@
 # eform-insight-dashboard-base
-
-![.NET Core](https://github.com/microting/eform-insight-dashboard-base/workflows/.NET%20Core/badge.svg)
-
+[![.NET Core](https://github.com/microting/eform-insight-dashboard-base/actions/workflows/dotnet-core.yml/badge.svg)](https://github.com/microting/eform-insight-dashboard-base/actions/workflows/dotnet-core.yml)
+[![NuGet Badge](https://buildstats.info/nuget/Microting.InsightDashboardBase)](https://www.nuget.org/packages/Microting.InsightDashboardBase/)
+[![Maintainability](https://api.codeclimate.com/v1/badges/0f1fa6fdb5463e08c6a3/maintainability)](https://codeclimate.com/github/microting/eform-insight-dashboard-base/maintainability)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/7ebbb2c3c8644715ba41a7ba309b5854)](https://www.codacy.com/gh/microting/eform-insight-dashboard-base/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=microting/eform-insight-dashboard-base&amp;utm_campaign=Badge_Grade)
 
 ## WARNINIG! NOT TO BE USED SEPERATLY
 
