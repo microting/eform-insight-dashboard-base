@@ -1,5 +1,14 @@
 # Changelog
 
+## [v2.1.9](https://github.com/microting/eform-insight-dashboard-base/tree/v2.1.9) (2021-03-17)
+
+[Full Changelog](https://github.com/microting/eform-insight-dashboard-base/compare/v2.1.8...v2.1.9)
+
+**Implemented enhancements:**
+
+- Bump Microting.eFormApi.BasePn from 2.0.103 to 2.0.104 [\#58](https://github.com/microting/eform-insight-dashboard-base/issues/58)
+- Bump Microting.eForm from 4.4.8 to 4.4.9 [\#57](https://github.com/microting/eform-insight-dashboard-base/issues/57)
+
 ## [v2.1.8](https://github.com/microting/eform-insight-dashboard-base/tree/v2.1.8) (2021-03-16)
 
 [Full Changelog](https://github.com/microting/eform-insight-dashboard-base/compare/v2.1.7...v2.1.8)
