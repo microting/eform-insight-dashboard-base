@@ -1,5 +1,14 @@
 # Changelog
 
+## [v2.1.24](https://github.com/microting/eform-insight-dashboard-base/tree/v2.1.24) (2021-04-16)
+
+[Full Changelog](https://github.com/microting/eform-insight-dashboard-base/compare/v2.1.23...v2.1.24)
+
+**Implemented enhancements:**
+
+- Bump Microting.eFormApi.BasePn from 2.0.126 to 2.0.127 [\#97](https://github.com/microting/eform-insight-dashboard-base/issues/97)
+- Bump Microting.eForm from 4.4.35 to 4.4.36 [\#96](https://github.com/microting/eform-insight-dashboard-base/issues/96)
+
 ## [v2.1.23](https://github.com/microting/eform-insight-dashboard-base/tree/v2.1.23) (2021-04-15)
 
 [Full Changelog](https://github.com/microting/eform-insight-dashboard-base/compare/v2.1.22...v2.1.23)
@@ -202,6 +211,7 @@
 **Merged pull requests:**
 
 - add field for CalculateByWeight [\#33](https://github.com/microting/eform-insight-dashboard-base/pull/33) ([sanioooook](https://github.com/sanioooook))
+- Bump Microsoft.NET.Test.Sdk from 16.6.1 to 16.8.3 [\#17](https://github.com/microting/eform-insight-dashboard-base/pull/17) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 
 ## [v2.0.90](https://github.com/microting/eform-insight-dashboard-base/tree/v2.0.90) (2021-02-10)
 
@@ -701,7 +711,6 @@
 
 **Merged pull requests:**
 
-- Bump Microsoft.NET.Test.Sdk from 16.6.1 to 16.8.3 [\#17](https://github.com/microting/eform-insight-dashboard-base/pull/17) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Updates [\#10](https://github.com/microting/eform-insight-dashboard-base/pull/10) ([emleonid](https://github.com/emleonid))
 
 ## [v1.0.6](https://github.com/microting/eform-insight-dashboard-base/tree/v1.0.6) (2020-02-14)
