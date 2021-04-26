@@ -1,5 +1,18 @@
 # Changelog
 
+## [v2.2.1](https://github.com/microting/eform-insight-dashboard-base/tree/v2.2.1) (2021-04-26)
+
+[Full Changelog](https://github.com/microting/eform-insight-dashboard-base/compare/v2.2.0...v2.2.1)
+
+**Implemented enhancements:**
+
+- Bump Microting.eFormApi.BasePn from 2.1.0 to 2.1.1 [\#105](https://github.com/microting/eform-insight-dashboard-base/issues/105)
+- Bump Microting.eForm from 4.5.0 to 4.5.1 [\#104](https://github.com/microting/eform-insight-dashboard-base/issues/104)
+
+## [v2.2.0](https://github.com/microting/eform-insight-dashboard-base/tree/v2.2.0) (2021-04-21)
+
+[Full Changelog](https://github.com/microting/eform-insight-dashboard-base/compare/v2.1.27...v2.2.0)
+
 ## [v2.1.27](https://github.com/microting/eform-insight-dashboard-base/tree/v2.1.27) (2021-04-21)
 
 [Full Changelog](https://github.com/microting/eform-insight-dashboard-base/compare/v2.1.26...v2.1.27)
@@ -767,6 +780,7 @@
 **Merged pull requests:**
 
 - Updates [\#7](https://github.com/microting/eform-insight-dashboard-base/pull/7) ([emleonid](https://github.com/emleonid))
+- Updated base verions [\#6](https://github.com/microting/eform-insight-dashboard-base/pull/6) ([Gid733](https://github.com/Gid733))
 
 ## [v1.0.2](https://github.com/microting/eform-insight-dashboard-base/tree/v1.0.2) (2020-01-29)
 
@@ -774,7 +788,6 @@
 
 **Merged pull requests:**
 
-- Updated base verions [\#6](https://github.com/microting/eform-insight-dashboard-base/pull/6) ([Gid733](https://github.com/Gid733))
 - Updates [\#5](https://github.com/microting/eform-insight-dashboard-base/pull/5) ([emleonid](https://github.com/emleonid))
 - Fix tests [\#4](https://github.com/microting/eform-insight-dashboard-base/pull/4) ([emleonid](https://github.com/emleonid))
 - Update db [\#3](https://github.com/microting/eform-insight-dashboard-base/pull/3) ([emleonid](https://github.com/emleonid))
