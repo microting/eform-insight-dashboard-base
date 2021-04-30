@@ -38,10 +38,11 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data.Factories
         {
             var defaultCs = "Server = localhost; port = 3306; Database = insight-pn; user = root; password = secretpassword; Convert Zero Datetime = true;";
             var optionsBuilder = new DbContextOptionsBuilder<InsightDashboardPnDbContext>();
-            optionsBuilder.UseMySql(args.Any() ? args[0] : defaultCs, mysqlOptions =>
-                {
-                    mysqlOptions.ServerVersion(new Version(10, 4, 0), ServerType.MariaDb);
-                });
+            optionsBuilder.UseMySql(args.Any() ? args[0] : defaultCs, new MariaDbServerVersion(
+                new Version(10, 4, 0)), mySqlOptionsAction: builder =>
+            {
+                builder.EnableRetryOnFailure();
+            });
 
             return new InsightDashboardPnDbContext(optionsBuilder.Options);
             // dotnet ef migrations add InitialCreate--project Microting.InsightDashboardBase--startup - project DBMigrator
