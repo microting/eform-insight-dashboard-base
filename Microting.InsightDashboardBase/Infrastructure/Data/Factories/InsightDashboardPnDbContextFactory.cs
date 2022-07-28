@@ -39,7 +39,7 @@ namespace Microting.InsightDashboardBase.Infrastructure.Data.Factories
             var defaultCs = "Server = localhost; port = 3306; Database = insight-pn; user = root; password = secretpassword; Convert Zero Datetime = true;";
             var optionsBuilder = new DbContextOptionsBuilder<InsightDashboardPnDbContext>();
             optionsBuilder.UseMySql(args.Any() ? args[0] : defaultCs, new MariaDbServerVersion(
-                new Version(10, 4, 0)), mySqlOptionsAction: builder =>
+                ServerVersion.AutoDetect(args.Any() ? args[0] : defaultCs)), mySqlOptionsAction: builder =>
             {
                 builder.EnableRetryOnFailure();
             });
