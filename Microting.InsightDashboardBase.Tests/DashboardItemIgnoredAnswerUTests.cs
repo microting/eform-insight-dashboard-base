@@ -50,20 +50,19 @@ namespace Microting.InsightDashboardBase.Tests
             List<DashboardItemIgnoredAnswer> dashboardItemIgnoredAnswers =
                 DbContext.DashboardItemIgnoredAnswers.AsNoTracking().ToList();
 
-            Assert.NotNull(dbDashboardItemIgnoredAnswer);
-            Assert.AreEqual(1, dashboardItemIgnoredAnswers.Count);
+            Assert.That(dbDashboardItemIgnoredAnswer, Is.Not.Null);
+            Assert.That(dashboardItemIgnoredAnswers.Count, Is.EqualTo(1));
 
-            Assert.AreEqual(dashboardItemIgnoredAnswer.Id, dbDashboardItemIgnoredAnswer.Id);
-            Assert.AreEqual(1, dbDashboardItemIgnoredAnswer.Version);
-            Assert.AreEqual(dashboardItemIgnoredAnswer.WorkflowState, dbDashboardItemIgnoredAnswer.WorkflowState);
-            Assert.AreEqual(dashboardItemIgnoredAnswer.CreatedAt.ToString(CultureInfo.InvariantCulture),
-                dbDashboardItemIgnoredAnswer.CreatedAt.ToString(CultureInfo.InvariantCulture));
-            Assert.AreEqual(dashboardItemIgnoredAnswer.CreatedByUserId, dbDashboardItemIgnoredAnswer.CreatedByUserId);
-            Assert.AreEqual(dashboardItemIgnoredAnswer.UpdatedAt.ToString(),
-                dbDashboardItemIgnoredAnswer.UpdatedAt.ToString());
-            Assert.AreEqual(dashboardItemIgnoredAnswer.UpdatedByUserId, dbDashboardItemIgnoredAnswer.UpdatedByUserId);
-            Assert.AreEqual(dashboardItemIgnoredAnswer.AnswerId, dbDashboardItemIgnoredAnswer.AnswerId);
-            Assert.AreEqual(dashboardItemIgnoredAnswer.DashboardItemId, dbDashboardItemIgnoredAnswer.DashboardItemId);
+            Assert.That(dbDashboardItemIgnoredAnswer.Id, Is.EqualTo(dashboardItemIgnoredAnswer.Id));
+            Assert.That(dbDashboardItemIgnoredAnswer.Version, Is.EqualTo(1));
+            Assert.That(dbDashboardItemIgnoredAnswer.WorkflowState, Is.EqualTo(dashboardItemIgnoredAnswer.WorkflowState));
+            Assert.That(dbDashboardItemIgnoredAnswer.CreatedAt.ToString(CultureInfo.InvariantCulture),
+                Is.EqualTo(dashboardItemIgnoredAnswer.CreatedAt.ToString(CultureInfo.InvariantCulture)));
+            Assert.That(dbDashboardItemIgnoredAnswer.CreatedByUserId, Is.EqualTo(dashboardItemIgnoredAnswer.CreatedByUserId));
+            Assert.That(dbDashboardItemIgnoredAnswer.UpdatedAt.ToString(), Is.EqualTo(dashboardItemIgnoredAnswer.UpdatedAt.ToString()));
+            Assert.That(dbDashboardItemIgnoredAnswer.UpdatedByUserId, Is.EqualTo(dashboardItemIgnoredAnswer.UpdatedByUserId));
+            Assert.That(dbDashboardItemIgnoredAnswer.AnswerId, Is.EqualTo(dashboardItemIgnoredAnswer.AnswerId));
+            Assert.That(dbDashboardItemIgnoredAnswer.DashboardItemId, Is.EqualTo(dashboardItemIgnoredAnswer.DashboardItemId));
         }
 
         [Test]
@@ -79,16 +78,16 @@ namespace Microting.InsightDashboardBase.Tests
             DashboardItemIgnoredAnswer dbDashboardItemIgnoredAnswer = DbContext.DashboardItemIgnoredAnswers.AsNoTracking().First();
             List<DashboardItemIgnoredAnswer> dashboardItemIgnoredAnswers = DbContext.DashboardItemIgnoredAnswers.AsNoTracking().ToList();
 
-            Assert.NotNull(dbDashboardItemIgnoredAnswer);
-            Assert.AreEqual(1, dashboardItemIgnoredAnswers.Count);
+            Assert.That(dbDashboardItemIgnoredAnswer, Is.Not.Null);
+            Assert.That(dashboardItemIgnoredAnswers.Count, Is.EqualTo(1));
 
-            Assert.AreEqual(dashboardItemIgnoredAnswer.Id, dbDashboardItemIgnoredAnswer.Id);
-            Assert.AreEqual(2, dbDashboardItemIgnoredAnswer.Version);
-            Assert.AreEqual(Constants.WorkflowStates.Removed, dbDashboardItemIgnoredAnswer.WorkflowState);
-            Assert.AreEqual(dashboardItemIgnoredAnswer.CreatedAt.ToString(CultureInfo.InvariantCulture), dbDashboardItemIgnoredAnswer.CreatedAt.ToString(CultureInfo.InvariantCulture));
-            Assert.AreEqual(dashboardItemIgnoredAnswer.CreatedByUserId, dbDashboardItemIgnoredAnswer.CreatedByUserId);
-            Assert.AreEqual(dashboardItemIgnoredAnswer.UpdatedByUserId, dbDashboardItemIgnoredAnswer.UpdatedByUserId);
-            Assert.AreEqual(dashboardItemIgnoredAnswer.AnswerId, dbDashboardItemIgnoredAnswer.AnswerId);
+            Assert.That(dbDashboardItemIgnoredAnswer.Id, Is.EqualTo(dashboardItemIgnoredAnswer.Id));
+            Assert.That(dbDashboardItemIgnoredAnswer.Version, Is.EqualTo(2));
+            Assert.That(dbDashboardItemIgnoredAnswer.WorkflowState, Is.EqualTo(Constants.WorkflowStates.Removed));
+            Assert.That(dbDashboardItemIgnoredAnswer.CreatedAt.ToString(CultureInfo.InvariantCulture), Is.EqualTo(dashboardItemIgnoredAnswer.CreatedAt.ToString(CultureInfo.InvariantCulture)));
+            Assert.That(dbDashboardItemIgnoredAnswer.CreatedByUserId, Is.EqualTo(dashboardItemIgnoredAnswer.CreatedByUserId));
+            Assert.That(dbDashboardItemIgnoredAnswer.UpdatedByUserId, Is.EqualTo(dashboardItemIgnoredAnswer.UpdatedByUserId));
+            Assert.That(dbDashboardItemIgnoredAnswer.AnswerId, Is.EqualTo(dashboardItemIgnoredAnswer.AnswerId));
         }
     }
 }

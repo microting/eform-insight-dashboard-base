@@ -53,21 +53,20 @@ namespace Microting.InsightDashboardBase.Tests
             DashboardVersion dbDashboardVersion = DbContext.DashboardVersions.AsNoTracking().First();
             List<DashboardVersion> dashboardVersions = DbContext.DashboardVersions.AsNoTracking().ToList();
 
-            Assert.NotNull(dbDashboard);
-            Assert.NotNull(dbDashboardVersion);
-            Assert.AreEqual(1, dashboards.Count);
-            Assert.AreEqual(1, dashboardVersions.Count);
+            Assert.That(dbDashboard, Is.Not.Null);
+            Assert.That(dbDashboardVersion, Is.Not.Null);
+            Assert.That(dashboards.Count, Is.EqualTo(1));
+            Assert.That(dashboardVersions.Count, Is.EqualTo(1));
 
-            Assert.AreEqual(dashboard.Id, dbDashboard.Id);
-            Assert.AreEqual(1, dbDashboard.Version);
-            Assert.AreEqual(dashboard.WorkflowState, dbDashboard.WorkflowState);
-            Assert.AreEqual(dashboard.CreatedAt.ToString(CultureInfo.InvariantCulture),
-                dbDashboard.CreatedAt.ToString(CultureInfo.InvariantCulture));
-            Assert.AreEqual(dashboard.CreatedByUserId, dbDashboard.CreatedByUserId);
-            Assert.AreEqual(dashboard.UpdatedAt.ToString(), dbDashboard.UpdatedAt.ToString());
-            Assert.AreEqual(dashboard.UpdatedByUserId, dbDashboard.UpdatedByUserId);
-            Assert.AreEqual(dashboard.Name, dbDashboard.Name);
-            Assert.AreEqual(dashboard.SurveyId, dbDashboard.SurveyId);
+            Assert.That(dbDashboard.Id, Is.EqualTo(dashboard.Id));
+            Assert.That(dbDashboard.Version, Is.EqualTo(1));
+            Assert.That(dbDashboard.WorkflowState, Is.EqualTo(dashboard.WorkflowState));
+            Assert.That(dbDashboard.CreatedAt.ToString(CultureInfo.InvariantCulture), Is.EqualTo(dashboard.CreatedAt.ToString(CultureInfo.InvariantCulture)));
+            Assert.That(dbDashboard.CreatedByUserId, Is.EqualTo(dashboard.CreatedByUserId));
+            Assert.That(dbDashboard.UpdatedAt.ToString(), Is.EqualTo(dashboard.UpdatedAt.ToString()));
+            Assert.That(dbDashboard.UpdatedByUserId, Is.EqualTo(dashboard.UpdatedByUserId));
+            Assert.That(dbDashboard.Name, Is.EqualTo(dashboard.Name));
+            Assert.That(dbDashboard.SurveyId, Is.EqualTo(dashboard.SurveyId));
         }
 
         [Test]
@@ -89,34 +88,34 @@ namespace Microting.InsightDashboardBase.Tests
             List<Dashboard> dashboards = DbContext.Dashboards.AsNoTracking().ToList();
             List<DashboardVersion> dashboardVersion = DbContext.DashboardVersions.AsNoTracking().ToList();
 
-            Assert.NotNull(dbDashboard);
-            Assert.AreEqual(1, dashboards.Count);
-            Assert.AreEqual(2, dashboardVersion.Count);
+            Assert.That(dbDashboard, Is.Not.Null);
+            Assert.That(dashboards.Count, Is.EqualTo(1));
+            Assert.That(dashboardVersion.Count, Is.EqualTo(2));
 
-            Assert.AreEqual(dashboard.Id, dbDashboard.Id);
-            Assert.AreEqual(2, dbDashboard.Version);
-            Assert.AreEqual(dashboard.WorkflowState, dbDashboard.WorkflowState);
-            Assert.AreEqual(dashboard.UpdatedByUserId, dbDashboard.UpdatedByUserId);
-            Assert.AreEqual(dashboard.Name, dbDashboard.Name);
-            Assert.AreEqual(dashboard.LocationId, dbDashboard.LocationId);
-            Assert.AreEqual(dashboard.TagId, dbDashboard.TagId);
+            Assert.That(dbDashboard.Id, Is.EqualTo(dashboard.Id));
+            Assert.That(dbDashboard.Version, Is.EqualTo(2));
+            Assert.That(dbDashboard.WorkflowState, Is.EqualTo(dashboard.WorkflowState));
+            Assert.That(dbDashboard.UpdatedByUserId, Is.EqualTo(dashboard.UpdatedByUserId));
+            Assert.That(dbDashboard.Name, Is.EqualTo(dashboard.Name));
+            Assert.That(dbDashboard.LocationId, Is.EqualTo(dashboard.LocationId));
+            Assert.That(dbDashboard.TagId, Is.EqualTo(dashboard.TagId));
 
-            Assert.AreEqual(dashboard.Id, dashboardVersion[0].DashboardId);
-            Assert.AreEqual(1, dashboardVersion[0].Version);
-            Assert.AreEqual(dashboard.WorkflowState, dashboardVersion[0].WorkflowState);
-            Assert.AreEqual(dashboard.CreatedAt.ToString(CultureInfo.InvariantCulture), dashboardVersion[0].CreatedAt.ToString(CultureInfo.InvariantCulture));
-            Assert.AreEqual(dashboard.CreatedByUserId, dashboardVersion[0].CreatedByUserId);
-            Assert.AreEqual("Name", dashboardVersion[0].Name);
-            Assert.AreEqual(oldUpdatedAt.ToString(), dashboardVersion[0].UpdatedAt.ToString());
-            Assert.AreEqual(dashboard.UpdatedByUserId, dashboardVersion[0].UpdatedByUserId);
+            Assert.That(dashboardVersion[0].DashboardId, Is.EqualTo(dashboard.Id));
+            Assert.That(dashboardVersion[0].Version, Is.EqualTo(1));
+            Assert.That(dashboardVersion[0].WorkflowState, Is.EqualTo(dashboard.WorkflowState));
+            Assert.That(dashboardVersion[0].CreatedAt.ToString(CultureInfo.InvariantCulture), Is.EqualTo(dashboard.CreatedAt.ToString(CultureInfo.InvariantCulture)));
+            Assert.That(dashboardVersion[0].CreatedByUserId, Is.EqualTo(dashboard.CreatedByUserId));
+            Assert.That(dashboardVersion[0].Name, Is.EqualTo("Name"));
+            Assert.That(dashboardVersion[0].UpdatedAt.ToString(), Is.EqualTo(oldUpdatedAt.ToString()));
+            Assert.That(dashboardVersion[0].UpdatedByUserId, Is.EqualTo(dashboard.UpdatedByUserId));
 
-            Assert.AreEqual(dashboard.Id, dashboardVersion[1].DashboardId);
-            Assert.AreEqual(2, dashboardVersion[1].Version);
-            Assert.AreEqual(dashboard.WorkflowState, dashboardVersion[1].WorkflowState);
-            Assert.AreEqual(dashboard.CreatedAt.ToString(CultureInfo.InvariantCulture), dashboardVersion[1].CreatedAt.ToString(CultureInfo.InvariantCulture));
-            Assert.AreEqual(dashboard.CreatedByUserId, dashboardVersion[1].CreatedByUserId);
-            Assert.AreEqual("Name - Updated", dashboardVersion[1].Name);
-            Assert.AreEqual(dashboard.UpdatedByUserId, dashboardVersion[1].UpdatedByUserId);
+            Assert.That(dashboardVersion[1].DashboardId, Is.EqualTo(dashboard.Id));
+            Assert.That(dashboardVersion[1].Version, Is.EqualTo(2));
+            Assert.That(dashboardVersion[1].WorkflowState, Is.EqualTo(dashboard.WorkflowState));
+            Assert.That(dashboardVersion[1].CreatedAt.ToString(CultureInfo.InvariantCulture), Is.EqualTo(dashboard.CreatedAt.ToString(CultureInfo.InvariantCulture)));
+            Assert.That(dashboardVersion[1].CreatedByUserId, Is.EqualTo(dashboard.CreatedByUserId));
+            Assert.That(dashboardVersion[1].Name, Is.EqualTo("Name - Updated"));
+            Assert.That(dashboardVersion[1].UpdatedByUserId, Is.EqualTo(dashboard.UpdatedByUserId));
         }
 
         [Test]
@@ -137,31 +136,31 @@ namespace Microting.InsightDashboardBase.Tests
             List<Dashboard> dashboards = DbContext.Dashboards.AsNoTracking().ToList();
             List<DashboardVersion> dashboardVersion = DbContext.DashboardVersions.AsNoTracking().ToList();
 
-            Assert.NotNull(dbDashboard);
-            Assert.AreEqual(1, dashboards.Count);
-            Assert.AreEqual(2, dashboardVersion.Count);
+            Assert.That(dbDashboard, Is.Not.Null);
+            Assert.That(dashboards.Count, Is.EqualTo(1));
+            Assert.That(dashboardVersion.Count, Is.EqualTo(2));
 
-            Assert.AreEqual(dashboard.Id, dbDashboard.Id);
-            Assert.AreEqual(2, dbDashboard.Version);
-            Assert.AreEqual(Constants.WorkflowStates.Removed, dbDashboard.WorkflowState);
-            Assert.AreEqual(dashboard.CreatedAt.ToString(CultureInfo.InvariantCulture), dbDashboard.CreatedAt.ToString(CultureInfo.InvariantCulture));
-            Assert.AreEqual(dashboard.CreatedByUserId, dbDashboard.CreatedByUserId);
-            Assert.AreEqual(dashboard.UpdatedByUserId, dbDashboard.UpdatedByUserId);
+            Assert.That(dbDashboard.Id, Is.EqualTo(dashboard.Id));
+            Assert.That(dbDashboard.Version, Is.EqualTo(2));
+            Assert.That(dbDashboard.WorkflowState, Is.EqualTo(Constants.WorkflowStates.Removed));
+            Assert.That(dbDashboard.CreatedAt.ToString(CultureInfo.InvariantCulture), Is.EqualTo(dashboard.CreatedAt.ToString(CultureInfo.InvariantCulture)));
+            Assert.That(dbDashboard.CreatedByUserId, Is.EqualTo(dashboard.CreatedByUserId));
+            Assert.That(dbDashboard.UpdatedByUserId, Is.EqualTo(dashboard.UpdatedByUserId));
 
-            Assert.AreEqual(dashboard.Id, dashboardVersion[0].DashboardId);
-            Assert.AreEqual(1, dashboardVersion[0].Version);
-            Assert.AreEqual(Constants.WorkflowStates.Created, dashboardVersion[0].WorkflowState);
-            Assert.AreEqual(dashboard.CreatedAt.ToString(CultureInfo.InvariantCulture), dashboardVersion[0].CreatedAt.ToString(CultureInfo.InvariantCulture));
-            Assert.AreEqual(dashboard.CreatedByUserId, dashboardVersion[0].CreatedByUserId);
-            Assert.AreEqual(oldUpdatedAt.ToString(), dashboardVersion[0].UpdatedAt.ToString());
-            Assert.AreEqual(dashboard.UpdatedByUserId, dashboardVersion[0].UpdatedByUserId);
+            Assert.That(dashboardVersion[0].DashboardId, Is.EqualTo(dashboard.Id));
+            Assert.That(dashboardVersion[0].Version, Is.EqualTo(1));
+            Assert.That(dashboardVersion[0].WorkflowState, Is.EqualTo(Constants.WorkflowStates.Created));
+            Assert.That(dashboardVersion[0].CreatedAt.ToString(CultureInfo.InvariantCulture), Is.EqualTo(dashboard.CreatedAt.ToString(CultureInfo.InvariantCulture)));
+            Assert.That(dashboardVersion[0].CreatedByUserId, Is.EqualTo(dashboard.CreatedByUserId));
+            Assert.That(dashboardVersion[0].UpdatedAt.ToString(), Is.EqualTo(oldUpdatedAt.ToString()));
+            Assert.That(dashboardVersion[0].UpdatedByUserId, Is.EqualTo(dashboard.UpdatedByUserId));
 
-            Assert.AreEqual(dashboard.Id, dashboardVersion[1].DashboardId);
-            Assert.AreEqual(2, dashboardVersion[1].Version);
-            Assert.AreEqual(Constants.WorkflowStates.Removed, dashboardVersion[1].WorkflowState);
-            Assert.AreEqual(dashboard.CreatedAt.ToString(CultureInfo.InvariantCulture), dashboardVersion[1].CreatedAt.ToString(CultureInfo.InvariantCulture));
-            Assert.AreEqual(dashboard.CreatedByUserId, dashboardVersion[1].CreatedByUserId);
-            Assert.AreEqual(dashboard.UpdatedByUserId, dashboardVersion[1].UpdatedByUserId);
+            Assert.That(dashboardVersion[1].DashboardId, Is.EqualTo(dashboard.Id));
+            Assert.That(dashboardVersion[1].Version, Is.EqualTo(2));
+            Assert.That(dashboardVersion[1].WorkflowState, Is.EqualTo(Constants.WorkflowStates.Removed));
+            Assert.That(dashboardVersion[1].CreatedAt.ToString(CultureInfo.InvariantCulture), Is.EqualTo(dashboard.CreatedAt.ToString(CultureInfo.InvariantCulture)));
+            Assert.That(dashboardVersion[1].CreatedByUserId, Is.EqualTo(dashboard.CreatedByUserId));
+            Assert.That(dashboardVersion[1].UpdatedByUserId, Is.EqualTo(dashboard.UpdatedByUserId));
         }
     }
 }

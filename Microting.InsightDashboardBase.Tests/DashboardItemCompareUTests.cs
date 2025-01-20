@@ -48,21 +48,21 @@ namespace Microting.InsightDashboardBase.Tests
             DashboardItemCompare dbDashboardItemCompare = DbContext.DashboardItemCompares.AsNoTracking().First();
             List<DashboardItemCompare> dashboardItemCompares = DbContext.DashboardItemCompares.AsNoTracking().ToList();
 
-            Assert.NotNull(dbDashboardItemCompare);
-            Assert.AreEqual(1, dashboardItemCompares.Count);
+            Assert.That(dbDashboardItemCompare, Is.Not.Null);
+            Assert.That(dashboardItemCompares.Count, Is.EqualTo(1));
 
-            Assert.AreEqual(dashboardItemCompare.Id, dbDashboardItemCompare.Id);
-            Assert.AreEqual(1, dbDashboardItemCompare.Version);
-            Assert.AreEqual(dashboardItemCompare.WorkflowState, dbDashboardItemCompare.WorkflowState);
-            Assert.AreEqual(dashboardItemCompare.CreatedAt.ToString(CultureInfo.InvariantCulture),
-                dbDashboardItemCompare.CreatedAt.ToString(CultureInfo.InvariantCulture));
-            Assert.AreEqual(dashboardItemCompare.CreatedByUserId, dbDashboardItemCompare.CreatedByUserId);
-            Assert.AreEqual(dashboardItemCompare.UpdatedAt.ToString(), dbDashboardItemCompare.UpdatedAt.ToString());
-            Assert.AreEqual(dashboardItemCompare.UpdatedByUserId, dbDashboardItemCompare.UpdatedByUserId);
-            Assert.AreEqual(dashboardItemCompare.Position, dbDashboardItemCompare.Position);
-            Assert.AreEqual(dashboardItemCompare.LocationId, dbDashboardItemCompare.LocationId);
-            Assert.AreEqual(dashboardItemCompare.TagId, dbDashboardItemCompare.TagId);
-            Assert.AreEqual(dashboardItemCompare.DashboardItemId, dbDashboardItemCompare.DashboardItemId);
+            Assert.That(dbDashboardItemCompare.Id, Is.EqualTo(dashboardItemCompare.Id));
+            Assert.That(dbDashboardItemCompare.Version, Is.EqualTo(1));
+            Assert.That(dbDashboardItemCompare.WorkflowState, Is.EqualTo(dashboardItemCompare.WorkflowState));
+            Assert.That(dbDashboardItemCompare.CreatedAt.ToString(CultureInfo.InvariantCulture),
+                Is.EqualTo(dashboardItemCompare.CreatedAt.ToString(CultureInfo.InvariantCulture)));
+            Assert.That(dbDashboardItemCompare.CreatedByUserId, Is.EqualTo(dashboardItemCompare.CreatedByUserId));
+            Assert.That(dbDashboardItemCompare.UpdatedAt.ToString(), Is.EqualTo(dashboardItemCompare.UpdatedAt.ToString()));
+            Assert.That(dbDashboardItemCompare.UpdatedByUserId, Is.EqualTo(dashboardItemCompare.UpdatedByUserId));
+            Assert.That(dbDashboardItemCompare.Position, Is.EqualTo(dashboardItemCompare.Position));
+            Assert.That(dbDashboardItemCompare.LocationId, Is.EqualTo(dashboardItemCompare.LocationId));
+            Assert.That(dbDashboardItemCompare.TagId, Is.EqualTo(dashboardItemCompare.TagId));
+            Assert.That(dbDashboardItemCompare.DashboardItemId, Is.EqualTo(dashboardItemCompare.DashboardItemId));
         }
 
         [Test]
@@ -78,16 +78,17 @@ namespace Microting.InsightDashboardBase.Tests
             DashboardItemCompare dbDashboardItemCompare = DbContext.DashboardItemCompares.AsNoTracking().First();
             List<DashboardItemCompare> dashboardItemCompareItems = DbContext.DashboardItemCompares.AsNoTracking().ToList();
 
-            Assert.NotNull(dbDashboardItemCompare);
-            Assert.AreEqual(1, dashboardItemCompareItems.Count);
+            Assert.That(dbDashboardItemCompare, Is.Not.Null);
+            Assert.That(dashboardItemCompareItems.Count, Is.EqualTo(1));
 
-            Assert.AreEqual(dashboardItemCompare.Id, dbDashboardItemCompare.Id);
-            Assert.AreEqual(2, dbDashboardItemCompare.Version);
-            Assert.AreEqual(Constants.WorkflowStates.Removed, dbDashboardItemCompare.WorkflowState);
-            Assert.AreEqual(dashboardItemCompare.CreatedAt.ToString(CultureInfo.InvariantCulture), dbDashboardItemCompare.CreatedAt.ToString(CultureInfo.InvariantCulture));
-            Assert.AreEqual(dashboardItemCompare.CreatedByUserId, dbDashboardItemCompare.CreatedByUserId);
-            Assert.AreEqual(dashboardItemCompare.UpdatedByUserId, dbDashboardItemCompare.UpdatedByUserId);
-            Assert.AreEqual(dashboardItemCompare.Position, dbDashboardItemCompare.Position);
+            Assert.That(dbDashboardItemCompare.Id, Is.EqualTo(dashboardItemCompare.Id));
+            Assert.That(dbDashboardItemCompare.Version, Is.EqualTo(2));
+            Assert.That(dbDashboardItemCompare.WorkflowState, Is.EqualTo(Constants.WorkflowStates.Removed));
+            Assert.That(dbDashboardItemCompare.CreatedAt.ToString(CultureInfo.InvariantCulture),
+                Is.EqualTo(dashboardItemCompare.CreatedAt.ToString(CultureInfo.InvariantCulture)));
+            Assert.That(dbDashboardItemCompare.CreatedByUserId, Is.EqualTo(dashboardItemCompare.CreatedByUserId));
+            Assert.That(dbDashboardItemCompare.UpdatedByUserId, Is.EqualTo(dashboardItemCompare.UpdatedByUserId));
+            Assert.That(dbDashboardItemCompare.Position, Is.EqualTo(dashboardItemCompare.Position));
         }
     }
 }
