@@ -36,6 +36,15 @@ namespace Microting.InsightDashboardBase.Infrastructure.Enums
         VerticalBar,
         VerticalBarStacked,
         VerticalBarGrouped,
-        GroupedStackedBarChart
+        GroupedStackedBarChart,
+
+        /// <summary>
+        /// 100% stacked vertical bars, one band per location or tag.
+        ///
+        /// Appended, never inserted: DashboardItem.ChartType is persisted as a
+        /// plain int with no string conversion, so renumbering this enum would
+        /// silently reclassify every dashboard item already saved.
+        /// </summary>
+        GroupedNormalizedStackedBarChart
     }
 }
